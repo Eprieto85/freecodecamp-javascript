@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Variables &amp; Cadenas — Módulo 01</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 01 · JavaScript</div>
+  <h1>Variables <span>&amp;</span> Cadenas</h1>
+  <p>Declaración de variables, scope, y los métodos más útiles para trabajar con strings.</p>
+</header>
+<main>
+
+  <!-- 1. TIPOS DE VARIABLES -->
+  <section>
+    <div class="section-title">01 · Tipos de declaración</div>
+    <div class="card">
+      <h2>const · let · var</h2>
+      <p class="desc">Cada palabra clave tiene un comportamiento distinto respecto a reasignación, redeclaración y scope.</p>
+      <div class="var-grid">
+        <div class="var-card const">
+          <div class="keyword">const</div>
+          <p>No se puede reasignar ni redeclarar. Scope de bloque.</p>
+          <span class="tag green">Preferida</span>
+        </div>
+        <div class="var-card let">
+          <div class="keyword">let</div>
+          <p>Se puede reasignar, no redeclarar. Scope de bloque.</p>
+          <span class="tag blue">Cuando cambia</span>
+        </div>
+        <div class="var-card var-kw">
+          <div class="keyword">var</div>
+          <p>Scope de función. Se puede reasignar y redeclarar. Obsoleta.</p>
+          <span class="tag orange">Evitar</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. MÉTODOS DE STRING -->
+  <section>
+    <div class="section-title">02 · Laboratorio — Métodos de cadena</div>
+    <div class="card">
+      <h2>Explorador de String Methods</h2>
+      <p class="desc">Escribe una cadena y aplica cualquier método para ver el resultado en tiempo real.</p>
+      <input id="str-input" class="str-input" type="text" value="Hola, freeCodeCamp!" placeholder="Escribe tu cadena aquí..." oninput="updateResult('preview')" />
+      <div class="methods-grid" id="methods-grid"></div>
+      <div class="str-result" id="str-result">← Selecciona un método para aplicar</div>
+    </div>
+  </section>
+
+  <!-- 3. TEMPLATE LITERALS -->
+  <section>
+    <div class="section-title">03 · Template Literals en acción</div>
+    <div class="card">
+      <h2>Generador de Presentación</h2>
+      <p class="desc">Las template literals permiten incrustar expresiones dentro de cadenas usando <code style="color:var(--accent4)">`${}`</code>.</p>
+      <div class="tl-form">
+        <input class="tl-input" id="tl-name" placeholder="Tu nombre" value="Edisson" oninput="updateTL()" />
+        <input class="tl-input" id="tl-job" placeholder="Tu profesión" value="Desarrollador" oninput="updateTL()" />
+        <input class="tl-input" id="tl-city" placeholder="Ciudad" value="Bogotá" oninput="updateTL()" />
+        <input class="tl-input" id="tl-skill" placeholder="Tu lenguaje favorito" value="JavaScript" oninput="updateTL()" />
+      </div>
+      <div class="tl-output" id="tl-output"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 01 — Variables y Cadenas<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

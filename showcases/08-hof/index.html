@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS HOF — Módulo 08</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 08 · JavaScript</div>
+  <h1>Funciones de <span>Orden Superior</span></h1>
+  <p>Callbacks, map, filter, reduce y composición de funciones.</p>
+</header>
+<main>
+
+  <!-- 1. DATA PIPELINE -->
+  <section>
+    <div class="section-title">01 · Pipeline de datos — map + filter + reduce</div>
+    <div class="card">
+      <h2>Procesador de Empleados</h2>
+      <p class="desc">Activa o desactiva cada función para ver cómo transforma los datos paso a paso.</p>
+      <div class="pipe-controls">
+        <button class="pipe-toggle on" id="toggle-map" onclick="togglePipe('map')">map: salario × 1.1</button>
+        <button class="pipe-toggle on" id="toggle-filter" onclick="togglePipe('filter')">filter: salario > 3000</button>
+        <button class="pipe-toggle on" id="toggle-reduce" onclick="togglePipe('reduce')">reduce: total</button>
+      </div>
+      <div class="pipe-visual" id="pipe-visual"></div>
+      <div class="pipe-result" id="pipe-result"></div>
+    </div>
+  </section>
+
+  <!-- 2. CALLBACKS -->
+  <section>
+    <div class="section-title">02 · Callbacks — funciones como argumentos</div>
+    <div class="card">
+      <h2>Patrones de Callback</h2>
+      <p class="desc">Una función de orden superior acepta otra función como argumento. Así funcionan map, filter, sort y más.</p>
+      <div class="cb-cards">
+        <div class="cb-card">
+          <h3>sort() con callback</h3>
+          <p>Ordena según la función de comparación que le pases.</p>
+          <code>[3,1,4,1,5].sort((a,b) => a-b)<br>// [1,1,3,4,5]</code>
+        </div>
+        <div class="cb-card">
+          <h3>setTimeout(callback, ms)</h3>
+          <p>Ejecuta la función después de N milisegundos.</p>
+          <code>setTimeout(() => console.log("¡Ya!"), 1000)</code>
+        </div>
+        <div class="cb-card">
+          <h3>addEventListener(event, cb)</h3>
+          <p>Llama al callback cuando ocurre el evento.</p>
+          <code>btn.addEventListener("click", () => { ... })</code>
+        </div>
+        <div class="cb-card">
+          <h3>Función personalizada</h3>
+          <p>Cualquier función puede aceptar un callback.</p>
+          <code>function apply(arr, fn) {<br>&nbsp;&nbsp;return arr.map(fn);<br>}</code>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. COMPOSE -->
+  <section>
+    <div class="section-title">03 · Composición de funciones</div>
+    <div class="card">
+      <h2>Cadena de transformaciones</h2>
+      <p class="desc">Las funciones pequeñas se combinan en una cadena donde el output de una es el input de la siguiente.</p>
+      <div class="c-in-wrap">
+        <span style="color:var(--muted);font-size:.88rem">Valor inicial:</span>
+        <input class="c-num-in" id="c-input" value="5" type="number" oninput="updateCompose()" />
+      </div>
+      <div class="compose-flow" id="compose-flow" style="margin-top:1rem"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 08 — Funciones de Orden Superior<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+    :root{--bg:#0b0e17;--surface:#131722;--surface2:#1c2130;--border:#263046;--accent:#6c63ff;--accent2:#ff6584;--accent3:#43e97b;--text:#e8eaf0;--muted:#8b93b0;--radius:10px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:2rem 1rem}
+    .container{max-width:900px;margin:0 auto}
+    .header{text-align:center;margin-bottom:1.8rem}
+    .header h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .header p{color:var(--muted);font-size:.88rem;margin-top:.4rem}
+    .controls{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem}
+    button{border:none;border-radius:8px;color:#fff;cursor:pointer;font-size:.9rem;font-weight:700;padding:.65rem 1.4rem;transition:opacity .15s}
+    button:hover{opacity:.85}
+    #generate-btn{background:var(--accent)}
+    #sort-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));display:none}
+    #array-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;display:flex;flex-direction:column;gap:.7rem;min-height:120px}
+    #array-container>div{display:flex;gap:.6rem;justify-content:center;padding:.35rem;border-radius:8px}
+    #array-container span{background:var(--surface2);border:2px solid transparent;border-radius:8px;font-size:1.05rem;font-weight:700;min-width:3.2rem;padding:.55rem .8rem;text-align:center}
+    #starting-array span{border-color:var(--accent)}
+    .hint{color:var(--muted);font-size:.8rem;text-align:center;margin-top:1rem}
+    .note{border-top:1px solid var(--border);color:var(--muted);font-size:.74rem;margin-top:2rem;padding-top:1rem;text-align:center;line-height:1.6}
+  
+
+.ep-footer{padding:1.5rem 1rem;margin-top:2rem;border-top:1px solid rgba(128,128,128,.3)}
+.ep-credit{margin-top:.6rem;font-size:.8rem;opacity:.8;text-align:center}
+.ep-credit a{color:inherit;text-decoration:underline}

@@ -1,0 +1,41 @@
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#140a24,#240d3a,#140a24);min-height:100vh;color:#fdf4ff;}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:rgba(0,0,0,0.3);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,121,249,0.12);}
+    .nav-logo{font-size:0.9rem;font-weight:700;color:#e879f9;font-family:'JetBrains Mono',monospace;}
+    .nav-badge{background:rgba(232,121,249,0.1);border:1px solid rgba(232,121,249,0.3);color:#e879f9;font-size:0.72rem;padding:3px 12px;border-radius:20px;}
+    .lang-btns{display:flex;gap:6px;}
+    .lb{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);padding:3px 10px;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:all .2s;}
+    .lb:hover,.lb.active{background:#e879f9;border-color:#e879f9;color:#140a24;font-weight:700;}
+    .hero{text-align:center;padding:44px 20px 28px;}
+    .hero-label{display:inline-block;background:rgba(232,121,249,0.08);border:1px solid rgba(232,121,249,0.2);padding:4px 16px;border-radius:20px;font-size:0.75rem;color:#e879f9;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;}
+    .hero h1{font-size:2.4rem;font-weight:900;color:#fff;margin-bottom:8px;}
+    .hero h1 span{color:#e879f9;}
+    .hero p{color:rgba(253,244,255,0.5);font-size:0.92rem;max-width:500px;margin:0 auto;}
+    .oracle-wrap{max-width:720px;margin:0 auto 28px;padding:0 20px;}
+    .oracle-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(232,121,249,0.14);border-radius:28px;padding:36px 40px;text-align:center;}
+    .crystal-ball{font-size:5rem;margin-bottom:16px;display:block;animation:float 3s ease-in-out infinite;}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+    .fortune-text{font-size:1.4rem;font-weight:700;color:#fff;min-height:40px;margin-bottom:12px;transition:all .3s;}
+    .fortune-code{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:rgba(232,121,249,0.6);margin-bottom:20px;min-height:20px;}
+    .ask-btn{background:linear-gradient(135deg,#e879f9,#9333ea);border:none;border-radius:14px;padding:16px 40px;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;letter-spacing:0.5px;}
+    .ask-btn:hover{filter:brightness(1.1);transform:translateY(-2px);}
+    .history-box{margin-top:20px;text-align:left;}
+    .h-title{font-size:0.68rem;color:rgba(253,244,255,0.3);font-family:'JetBrains Mono',monospace;margin-bottom:8px;}
+    .h-list{list-style:none;max-height:80px;overflow-y:auto;}
+    .h-list li{font-size:0.75rem;color:rgba(253,244,255,0.5);padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+    .concepts-wrap{max-width:900px;margin:0 auto 28px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .c-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px 12px;}
+    .c-kw{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#e879f9;font-weight:700;margin-bottom:5px;}
+    .c-desc{font-size:0.68rem;color:rgba(253,244,255,0.4);line-height:1.4;}
+    .code-box{max-width:900px;margin:0 auto 28px;padding:0 20px;}
+    .code-card{background:rgba(0,0,0,0.4);border:1px solid rgba(232,121,249,0.1);border-radius:14px;padding:18px 22px;}
+    .code-title{font-size:0.68rem;color:rgba(253,244,255,0.3);font-family:'JetBrains Mono',monospace;margin-bottom:10px;}
+    pre{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:rgba(253,244,255,0.7);line-height:1.6;overflow-x:auto;}
+    .kw{color:#e879f9;}.fn{color:#a78bfa;}.str{color:#34d399;}.num{color:#fbbf24;}
+    .ctx{background:rgba(0,0,0,0.2);border:1px solid rgba(232,121,249,0.08);border-radius:14px;max-width:900px;margin:0 auto 28px;padding:14px 20px;}
+    .ctx p{color:rgba(253,244,255,0.5);font-size:0.84rem;line-height:1.6;}
+    .ctx strong{color:#e879f9;}
+    footer{text-align:center;padding:20px;color:rgba(253,244,255,0.15);font-size:0.78rem;border-top:1px solid rgba(255,255,255,0.05);}
+    footer a{color:#e879f9;text-decoration:none;}
+    @media(max-width:580px){.concepts-wrap{grid-template-columns:1fr}}
+  

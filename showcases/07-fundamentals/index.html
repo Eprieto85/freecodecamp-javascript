@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Fundamentos — Módulo 07</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 07 · JavaScript</div>
+  <h1>Revisión de <span>Fundamentos</span></h1>
+  <p>Hoisting, scope, operador ternario, short-circuit, nullish coalescing y más.</p>
+</header>
+<main>
+
+  <!-- 1. HOISTING TIMELINE -->
+  <section>
+    <div class="section-title">01 · Hoisting — ¿Qué se eleva y qué no?</div>
+    <div class="card">
+      <h2>Orden de ejecución con Hoisting</h2>
+      <p class="desc">JavaScript "eleva" declaraciones al inicio del scope antes de ejecutar el código. Pero no todas.</p>
+      <div class="timeline">
+        <div class="t-item ok">
+          <div class="t-label">✅ Function Declaration — disponible antes de declararse</div>
+          <div class="t-code"><span class="ok-c">saludar()</span>; <span class="cm">// funciona ✓</span>
+<span class="kw">function</span> saludar() { <span class="kw">return</span> <span class="str">"hola"</span>; }</div>
+        </div>
+        <div class="t-item error">
+          <div class="t-label">❌ var — se eleva pero como undefined</div>
+          <div class="t-code"><span class="ok-c">console</span>.log(x); <span class="cm">// undefined (no error, pero no el valor)</span>
+<span class="kw">var</span> x = <span class="str">"valor"</span>;</div>
+        </div>
+        <div class="t-item error">
+          <div class="t-label">❌ let / const — zona muerta temporal</div>
+          <div class="t-code"><span class="ok-c">console</span>.log(y); <span class="err-c">// ReferenceError ✗</span>
+<span class="kw">let</span> y = <span class="str">"valor"</span>;</div>
+        </div>
+        <div class="t-item error">
+          <div class="t-label">❌ Function Expression — no se eleva</div>
+          <div class="t-code"><span class="err-c">fn();</span> <span class="cm">// TypeError: fn is not a function ✗</span>
+<span class="kw">const</span> fn = () => <span class="str">"hola"</span>;</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. TERNARY BUILDER -->
+  <section>
+    <div class="section-title">02 · Operador ternario interactivo</div>
+    <div class="card">
+      <h2>Constructor de expresión ternaria</h2>
+      <p class="desc">El ternario es un if/else de una sola línea: <code style="color:var(--accent3)">condición ? valorTrue : valorFalse</code></p>
+      <div class="tern-row">
+        <input class="t-in" id="t-var" value="edad" placeholder="variable" oninput="updateTern()" />
+        <select class="t-in" id="t-op" onchange="updateTern()" style="width:70px">
+          <option>>=</option><option>></option><option>===</option><option>!=</option><option>&lt;=</option><option>&lt;</option>
+        </select>
+        <input class="t-in" id="t-val" value="18" placeholder="valor" style="width:80px" oninput="updateTern()" />
+        <span style="color:var(--accent3);font-weight:700;font-family:var(--mono)">?</span>
+        <input class="t-in" id="t-true" value='"Mayor de edad"' placeholder="si true" oninput="updateTern()" />
+        <span style="color:var(--accent3);font-weight:700;font-family:var(--mono)">:</span>
+        <input class="t-in" id="t-false" value='"Menor de edad"' placeholder="si false" oninput="updateTern()" />
+      </div>
+      <div class="t-code-out" id="t-code-out"></div>
+      <div>
+        <span style="color:var(--muted);font-size:.82rem;margin-right:.5rem">edad =</span>
+        <input class="t-in" id="t-test" value="20" type="number" style="width:70px" oninput="testTern()" />
+        <div class="t-result" id="t-result"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MINI QUIZ -->
+  <section>
+    <div class="section-title">03 · Quiz de fundamentos</div>
+    <div class="card">
+      <h2>Pon a prueba lo aprendido</h2>
+      <p class="desc">Selecciona la respuesta correcta para cada pregunta.</p>
+      <div id="quiz-container"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 07 — Revisión de Fundamentos<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

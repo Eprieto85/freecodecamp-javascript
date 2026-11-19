@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Booleanos &amp; Números — Módulo 02</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 02 · JavaScript</div>
+  <h1>Booleanos <span>&amp;</span> Números</h1>
+  <p>Operadores de comparación, coerción de tipos, operadores lógicos y métodos del objeto Math.</p>
+</header>
+<main>
+
+  <!-- 1. COMPARACIONES -->
+  <section>
+    <div class="section-title">01 · == vs === — Igualdad estricta vs abstracta</div>
+    <div class="card">
+      <h2>Tabla de comparación</h2>
+      <p class="desc">La igualdad abstracta (==) hace coerción de tipos. La estricta (===) no. Siempre usa ===.</p>
+      <table class="cmp-table">
+        <thead><tr><th>Expresión</th><th>==</th><th>===</th><th>Razón</th></tr></thead>
+        <tbody id="cmp-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. TESTER -->
+  <section>
+    <div class="section-title">02 · Comparador interactivo</div>
+    <div class="card">
+      <h2>Prueba tus propios valores</h2>
+      <p class="desc">Ingresa dos valores y un operador para ver el resultado booleano.</p>
+      <div class="bool-row">
+        <input class="num-in" id="val-a" value="5" oninput="calcBool()" />
+        <select class="op-sel" id="op-sel" onchange="calcBool()">
+          <option>==</option><option>===</option><option>!=</option>
+          <option>!==</option><option>&gt;</option><option>&lt;</option>
+          <option>&gt;=</option><option>&lt;=</option>
+        </select>
+        <input class="num-in" id="val-b" value="&quot;5&quot;" oninput="calcBool()" />
+        <div class="bool-result" id="bool-result">true</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MATH -->
+  <section>
+    <div class="section-title">03 · Objeto Math — métodos principales</div>
+    <div class="card">
+      <h2>Calculadora Math</h2>
+      <p class="desc">Ingresa un número y ve el resultado de los métodos más usados del objeto Math.</p>
+      <div class="math-inputs">
+        <span style="color:var(--muted);font-size:.88rem">Número:</span>
+        <input class="num-in" id="math-num" value="16.75" style="width:110px" oninput="calcMath()" />
+        <span style="color:var(--muted);font-size:.88rem">Exponente:</span>
+        <input class="num-in" id="math-exp" value="2" style="width:70px" oninput="calcMath()" />
+      </div>
+      <div class="calc-grid" id="calc-grid"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 02 — Booleanos y Números<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

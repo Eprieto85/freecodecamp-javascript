@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FinanzApp — Administrador de Cuentas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <div class="app-header">
+    <h1>Finanz<span>App</span></h1>
+    <p>Administrador personal de cuentas y gastos</p>
+  </div>
+
+  <div class="summary">
+    <div class="card">
+      <div class="card-label">Balance Total</div>
+      <div class="card-value balance" id="card-balance">$0.00</div>
+      <div class="card-delta" id="card-txn-count">0 transacciones</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total Ingresos</div>
+      <div class="card-value income" id="card-income">$0.00</div>
+      <div class="card-delta" id="card-income-count">este mes</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Total Gastos</div>
+      <div class="card-value expense" id="card-expense">$0.00</div>
+      <div class="card-delta" id="card-expense-count">este mes</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <!-- TRANSACTIONS -->
+    <div>
+      <div class="section-title">
+        <span>Transacciones</span>
+        <span id="txn-count-label" style="font-weight:400"></span>
+      </div>
+      <div class="txn-filters">
+        <button class="filter-btn active" onclick="setFilter('all',this)">Todas</button>
+        <button class="filter-btn" onclick="setFilter('income',this)">Ingresos</button>
+        <button class="filter-btn" onclick="setFilter('expense',this)">Gastos</button>
+        <button class="filter-btn" onclick="setFilter('Alimentación',this)">🍔 Comida</button>
+        <button class="filter-btn" onclick="setFilter('Transporte',this)">🚌 Transporte</button>
+        <button class="filter-btn" onclick="setFilter('Salario',this)">💼 Salario</button>
+      </div>
+      <div class="txn-list" id="txn-list"></div>
+
+      <!-- CATEGORY CHART -->
+      <div class="chart-wrap">
+        <div class="section-title" style="margin-top:1.2rem">Gastos por categoría</div>
+        <div class="bar-chart" id="cat-chart"></div>
+      </div>
+    </div>
+
+    <!-- ADD FORM -->
+    <div>
+      <div class="section-title">Agregar Transacción</div>
+      <div class="add-form">
+        <div class="type-toggle">
+          <div class="type-btn inc active" id="type-inc" onclick="setType('income')">▲ Ingreso</div>
+          <div class="type-btn exp" id="type-exp" onclick="setType('expense')">▼ Gasto</div>
+        </div>
+        <div class="form-row">
+          <label>Descripción</label>
+          <input type="text" id="f-desc" placeholder="ej. Almuerzo, Salario..."/>
+        </div>
+        <div class="form-row">
+          <label>Monto ($)</label>
+          <input type="number" id="f-amount" placeholder="0.00" min="0.01" step="0.01"/>
+        </div>
+        <div class="form-row">
+          <label>Categoría</label>
+          <select id="f-cat">
+            <option>Salario</option>
+            <option>Freelance</option>
+            <option>Alimentación</option>
+            <option>Transporte</option>
+            <option>Vivienda</option>
+            <option>Educación</option>
+            <option>Entretenimiento</option>
+            <option>Salud</option>
+            <option>Ropa</option>
+            <option>Otros</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Fecha</label>
+          <input type="date" id="f-date"/>
+        </div>
+        <button class="add-btn" onclick="addTransaction()">+ Agregar Transacción</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<footer class="ep-footer"><div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+</body>
+</html>

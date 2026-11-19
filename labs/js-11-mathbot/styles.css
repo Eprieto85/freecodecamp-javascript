@@ -1,0 +1,42 @@
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:linear-gradient(135deg,#1a0a2e,#2d1052,#1a0a2e);min-height:100vh;color:#f3e8ff;}
+    nav{display:flex;justify-content:space-between;align-items:center;padding:16px 32px;background:rgba(0,0,0,0.3);backdrop-filter:blur(12px);border-bottom:1px solid rgba(192,132,252,0.12);}
+    .nav-logo{font-size:0.9rem;font-weight:700;color:#c084fc;font-family:'JetBrains Mono',monospace;}
+    .nav-badge{background:rgba(192,132,252,0.1);border:1px solid rgba(192,132,252,0.3);color:#c084fc;font-size:0.72rem;padding:3px 12px;border-radius:20px;}
+    .lang-btns{display:flex;gap:6px;}
+    .lb{background:transparent;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.4);padding:3px 10px;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:all .2s;}
+    .lb:hover,.lb.active{background:#c084fc;border-color:#c084fc;color:#1a0a2e;font-weight:700;}
+    .hero{text-align:center;padding:44px 20px 28px;}
+    .hero-label{display:inline-block;background:rgba(192,132,252,0.08);border:1px solid rgba(192,132,252,0.2);padding:4px 16px;border-radius:20px;font-size:0.75rem;color:#c084fc;margin-bottom:14px;letter-spacing:2px;text-transform:uppercase;}
+    .hero h1{font-size:2.4rem;font-weight:900;color:#fff;margin-bottom:8px;}
+    .hero h1 span{color:#c084fc;}
+    .hero p{color:rgba(243,232,255,0.5);font-size:0.92rem;max-width:500px;margin:0 auto;}
+    .rng-wrap{max-width:820px;margin:0 auto 20px;padding:0 20px;}
+    .rng-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(192,132,252,0.14);border-radius:24px;padding:24px 28px;text-align:center;}
+    .rng-label{font-size:0.75rem;color:#c084fc;font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:12px;}
+    .rng-num{font-size:5rem;font-weight:900;color:#fff;margin-bottom:16px;line-height:1;}
+    .rng-row{display:flex;gap:10px;justify-content:center;margin-bottom:12px;}
+    .inp-sm{width:90px;background:rgba(0,0,0,0.4);border:2px solid rgba(192,132,252,0.15);border-radius:8px;padding:9px 10px;color:#f3e8ff;font-size:0.85rem;text-align:center;outline:none;}
+    .inp-sm:focus{border-color:#c084fc;}
+    .gen-btn{background:linear-gradient(135deg,#c084fc,#7c3aed);border:none;border-radius:10px;padding:10px 24px;color:#fff;font-weight:700;cursor:pointer;font-size:0.88rem;transition:all .2s;}
+    .gen-btn:hover{filter:brightness(1.1);}
+    .methods-wrap{max-width:900px;margin:0 auto 28px;padding:0 20px;}
+    .methods-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    .m-wrap{max-width:820px;margin:0 auto 28px;padding:0 20px;}
+    .m-card{background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);border:1px solid rgba(192,132,252,0.14);border-radius:20px;padding:20px 24px;}
+    .m-title{font-size:0.75rem;color:#c084fc;font-family:'JetBrains Mono',monospace;letter-spacing:1px;margin-bottom:14px;}
+    .m-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+    .m-label{font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:rgba(243,232,255,0.5);min-width:200px;}
+    .m-val{font-family:'JetBrains Mono',monospace;font-size:0.95rem;font-weight:700;color:#fff;}
+    .m-note{font-size:0.68rem;color:rgba(243,232,255,0.3);margin-left:auto;}
+    .concepts-wrap{max-width:900px;margin:0 auto 28px;padding:0 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .c-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:14px 12px;}
+    .c-kw{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:#c084fc;font-weight:700;margin-bottom:5px;}
+    .c-desc{font-size:0.68rem;color:rgba(243,232,255,0.4);line-height:1.4;}
+    .ctx{background:rgba(0,0,0,0.2);border:1px solid rgba(192,132,252,0.08);border-radius:14px;max-width:900px;margin:0 auto 28px;padding:14px 20px;}
+    .ctx p{color:rgba(243,232,255,0.5);font-size:0.84rem;line-height:1.6;}
+    .ctx strong{color:#c084fc;}
+    footer{text-align:center;padding:20px;color:rgba(243,232,255,0.15);font-size:0.78rem;border-top:1px solid rgba(255,255,255,0.05);}
+    footer a{color:#c084fc;text-decoration:none;}
+    @media(max-width:580px){.methods-grid{grid-template-columns:1fr;}.concepts-wrap{grid-template-columns:1fr}}
+  

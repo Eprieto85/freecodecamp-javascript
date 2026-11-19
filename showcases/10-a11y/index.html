@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Accesibilidad — Módulo 10</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 10 · JavaScript</div>
+  <h1>JavaScript y <span>Accesibilidad</span></h1>
+  <p>ARIA roles, atributos, live regions y navegación por teclado para interfaces accesibles.</p>
+</header>
+<main>
+
+  <!-- 1. TABLIST ACCESSIBLE -->
+  <section>
+    <div class="section-title">01 · Componente accesible — Tablist con ARIA</div>
+    <div class="card">
+      <h2>Interfaz de Pestañas Accesible</h2>
+      <p class="desc">Este tablist usa <code style="color:var(--accent2)">role="tablist"</code>, <code style="color:var(--accent2)">role="tab"</code>, <code style="color:var(--accent2)">aria-selected</code> y <code style="color:var(--accent2)">aria-controls</code>. Navega con Tab y flechas.</p>
+      <div class="tab-demo">
+        <div role="tablist" aria-label="Planetas del sistema solar">
+          <button role="tab" aria-selected="true" aria-controls="panel-tierra" id="tab-tierra">🌍 Tierra</button>
+          <button role="tab" aria-selected="false" aria-controls="panel-marte" id="tab-marte">🔴 Marte</button>
+          <button role="tab" aria-selected="false" aria-controls="panel-jupiter" id="tab-jupiter">🟠 Júpiter</button>
+        </div>
+        <div role="tabpanel" id="panel-tierra" aria-labelledby="tab-tierra">
+          <strong>Tierra</strong> — Tercer planeta. Único con vida conocida. Radio: 6,371 km. Distancia al sol: 149.6 M km.
+        </div>
+        <div role="tabpanel" id="panel-marte" aria-labelledby="tab-marte" hidden>
+          <strong>Marte</strong> — Cuarto planeta. Llamado el planeta rojo. Radio: 3,390 km. Dos lunas: Fobos y Deimos.
+        </div>
+        <div role="tabpanel" id="panel-jupiter" aria-labelledby="tab-jupiter" hidden>
+          <strong>Júpiter</strong> — Planeta más grande. 95 lunas conocidas. La Gran Mancha Roja lleva 350+ años de tormenta.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ARIA ATTRIBUTES -->
+  <section>
+    <div class="section-title">02 · Atributos ARIA — referencia rápida</div>
+    <div class="card">
+      <h2>Los ARIA más usados en JavaScript</h2>
+      <p class="desc">Estos atributos comunican el estado dinámico de los componentes a los lectores de pantalla.</p>
+      <div class="aria-grid">
+        <div class="aria-card"><div class="aria-attr">aria-expanded</div><div class="aria-desc">Indica si un elemento colapsable está expandido o colapsado. Uso: menús, acordeones.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-live</div><div class="aria-desc">Anuncia cambios dinámicos. Valores: polite (espera), assertive (interrumpe), off.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-selected</div><div class="aria-desc">Estado de selección en tabs, opciones de lista o tree items.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-disabled</div><div class="aria-desc">Indica que un elemento está deshabilitado sin quitarlo del flujo del DOM.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-haspopup</div><div class="aria-desc">Indica que el elemento abre un menú, listbox, tree o dialog.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-controls</div><div class="aria-desc">Vincula un control con el elemento que controla por ID.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-label</div><div class="aria-desc">Texto accesible para elementos sin label visible.</div></div>
+        <div class="aria-card"><div class="aria-attr">aria-labelledby</div><div class="aria-desc">Apunta al ID de un elemento existente como label.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. LIVE REGION -->
+  <section>
+    <div class="section-title">03 · aria-live — Regiones dinámicas</div>
+    <div class="card">
+      <h2>Demo de aria-live</h2>
+      <p class="desc">Los lectores de pantalla anuncian automáticamente los cambios en regiones con <code style="color:var(--accent2)">aria-live</code>.</p>
+      <div class="live-demo">
+        <button class="l-btn" onclick="announce('polite','✅ Formulario guardado exitosamente.')">Guardar (polite)</button>
+        <button class="l-btn" onclick="announce('assertive','⚠️ Error: conexión perdida. Reintenta.')">Error (assertive)</button>
+        <button class="l-btn" onclick="announce('polite','📬 Tienes 3 mensajes nuevos.')">Notificación</button>
+      </div>
+      <div aria-live="polite" aria-atomic="true" class="live-region" id="live-out">Esperando anuncio...</div>
+      <div style="margin-top:.6rem;font-family:var(--mono);font-size:.75rem;color:var(--muted)" id="live-code"></div>
+    </div>
+  </section>
+
+  <!-- 4. KEYBOARD NAV -->
+  <section>
+    <div class="section-title">04 · Navegación por teclado</div>
+    <div class="card">
+      <h2>Lista con foco por teclado</h2>
+      <p class="desc">Una lista accesible permite navegar con Tab y Enter/Espacio para activar elementos.</p>
+      <ul class="kb-list" id="kb-list"></ul>
+      <div class="kb-hint">Presiona <kbd style="background:var(--code-bg);border:1px solid var(--border);border-radius:4px;padding:.1rem .4rem;font-family:var(--mono)">Tab</kbd> para moverte entre elementos y <kbd style="background:var(--code-bg);border:1px solid var(--border);border-radius:4px;padding:.1rem .4rem;font-family:var(--mono)">Enter</kbd> para seleccionar.</div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 10 — JavaScript y Accesibilidad<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

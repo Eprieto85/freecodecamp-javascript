@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Objetos — Módulo 05</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 05 · JavaScript</div>
+  <h1><span>Objetos</span> en JavaScript</h1>
+  <p>Creación, acceso, métodos, desestructuración y patrones con objetos JS.</p>
+</header>
+<main>
+
+  <!-- 1. CONTACT CARD BUILDER -->
+  <section>
+    <div class="section-title">01 · Laboratorio — Constructor de tarjeta de contacto</div>
+    <div class="card">
+      <h2>Objeto de Contacto en Tiempo Real</h2>
+      <p class="desc">Llena el formulario y observa cómo se construye el objeto JavaScript en tiempo real.</p>
+      <div class="contact-layout">
+        <div class="contact-form">
+          <div><div class="c-label">nombre</div><input class="c-in" id="c-name" value="Edisson Prieto" oninput="updateContact()" /></div>
+          <div><div class="c-label">profesion</div><input class="c-in" id="c-job" value="Desarrollador Web" oninput="updateContact()" /></div>
+          <div><div class="c-label">ciudad</div><input class="c-in" id="c-city" value="Bogotá" oninput="updateContact()" /></div>
+          <div><div class="c-label">email</div><input class="c-in" id="c-email" value="edisson@dev.co" oninput="updateContact()" /></div>
+          <div><div class="c-label">edad</div><input class="c-in" id="c-age" value="30" type="number" oninput="updateContact()" /></div>
+        </div>
+        <div class="contact-preview" id="contact-preview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OBJECT METHODS -->
+  <section>
+    <div class="section-title">02 · Métodos del objeto — Object.keys / values / entries</div>
+    <div class="card">
+      <h2>Explorador de métodos Object</h2>
+      <p class="desc">Aplica los métodos más usados sobre el objeto de contacto que creaste.</p>
+      <div>
+        <button class="obj-btn" onclick="objMethod('keys')">Object.keys()</button>
+        <button class="obj-btn" onclick="objMethod('values')">Object.values()</button>
+        <button class="obj-btn" onclick="objMethod('entries')">Object.entries()</button>
+        <button class="obj-btn" onclick="objMethod('assign')">Object.assign()</button>
+        <button class="obj-btn" onclick="objMethod('spread')">Spread {...obj}</button>
+        <button class="obj-btn" onclick="objMethod('freeze')">Object.freeze()</button>
+      </div>
+      <div class="obj-output" id="obj-output">← Selecciona un método</div>
+    </div>
+  </section>
+
+  <!-- 3. DESTRUCTURING -->
+  <section>
+    <div class="section-title">03 · Desestructuración de objetos y arrays</div>
+    <div class="card">
+      <h2>Sintaxis de Destructuring</h2>
+      <p class="desc">La desestructuración extrae valores de objetos y arrays en variables de forma concisa.</p>
+      <div class="destr-grid">
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">Objeto</div>
+          <div class="code-block">
+<span class="kw">const</span> persona = {
+  <span class="prop-key">nombre</span>: <span class="str">"Edisson"</span>,
+  <span class="prop-key">ciudad</span>: <span class="str">"Bogotá"</span>,
+  <span class="prop-key">edad</span>: <span class="prop-num">30</span>
+};
+
+<span class="cm">// Desestructuración</span>
+<span class="kw">const</span> { nombre, ciudad } = persona;
+<span class="ok">// nombre → "Edisson"</span>
+<span class="ok">// ciudad → "Bogotá"</span>
+
+<span class="cm">// Con alias</span>
+<span class="kw">const</span> { nombre: <span class="fn">n</span> } = persona;
+<span class="ok">// n → "Edisson"</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">Array</div>
+          <div class="code-block">
+<span class="kw">const</span> colores = [
+  <span class="str">"rojo"</span>, <span class="str">"verde"</span>, <span class="str">"azul"</span>
+];
+
+<span class="cm">// Desestructuración</span>
+<span class="kw">const</span> [primero, , tercero] = colores;
+<span class="ok">// primero → "rojo"</span>
+<span class="ok">// tercero → "azul"</span>
+
+<span class="cm">// Rest operator</span>
+<span class="kw">const</span> [head, ...rest] = colores;
+<span class="ok">// rest → ["verde","azul"]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 05 — Objetos<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RhythmBox — Caja de Ritmos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Rhythm<span>Box</span></h1>
+<p class="subtitle">Caja de ritmos interactiva — 7 pistas × 16 pasos</p>
+
+<div class="transport">
+  <button class="btn-play" id="play-btn" onclick="togglePlay()">▶ Play</button>
+  <button class="btn-clear" onclick="clearAll()">✕ Limpiar</button>
+  <div class="bpm-wrap">
+    <label>BPM</label>
+    <input type="number" id="bpm" value="120" min="40" max="240" oninput="updateBPM()"/>
+    <span class="bpm-display" id="bpm-label">120</span>
+  </div>
+  <div class="pattern-btns">
+    <button class="pat-btn" onclick="loadPattern('rock')">Rock</button>
+    <button class="pat-btn" onclick="loadPattern('latin')">Latino</button>
+    <button class="pat-btn" onclick="loadPattern('hiphop')">Hip-Hop</button>
+    <button class="pat-btn" onclick="loadPattern('funk')">Funk</button>
+  </div>
+</div>
+
+<div class="grid-wrap">
+  <div class="bar-labels" id="bar-labels"></div>
+  <div class="step-indicator" id="step-indicator"></div>
+  <div id="grid"></div>
+  <div class="mixer" id="mixer"></div>
+</div>
+
+<div class="status">
+  <span>Paso: <b id="stat-step">-</b></span>
+  <span>Compás: <b id="stat-bar">-</b></span>
+  <span>Tiempo: <b id="stat-time">0s</b></span>
+</div>
+
+<script src="script.js"></script>
+<footer class="ep-footer"><div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+</body>
+</html>

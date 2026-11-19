@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Arreglos — Módulo 04</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 04 · JavaScript</div>
+  <h1><span>Arreglos</span> en JavaScript</h1>
+  <p>Creación, mutación, iteración y transformación de arrays con los métodos más poderosos.</p>
+</header>
+<main>
+
+  <!-- 1. ARRAY VISUALIZER -->
+  <section>
+    <div class="section-title">01 · Visualizador de Array en tiempo real</div>
+    <div class="card">
+      <h2>Manipulador de Array</h2>
+      <p class="desc">Agrega, elimina y modifica elementos del array. Cada operación muestra el índice de cada elemento.</p>
+      <div class="arr-display" id="arr-display"></div>
+      <div class="arr-controls">
+        <input class="arr-in" id="arr-val" placeholder="valor..." />
+        <button class="a-btn" onclick="arrOp('push')">push()</button>
+        <button class="a-btn" onclick="arrOp('pop')">pop()</button>
+        <button class="a-btn" onclick="arrOp('unshift')">unshift()</button>
+        <button class="a-btn" onclick="arrOp('shift')">shift()</button>
+        <button class="a-btn" onclick="arrOp('reverse')">reverse()</button>
+        <button class="a-btn" onclick="arrOp('sort')">sort()</button>
+        <button class="a-btn" onclick="arrOp('reset')">reset</button>
+      </div>
+      <div class="arr-log" id="arr-log">Listo — usa los botones para modificar el array</div>
+    </div>
+  </section>
+
+  <!-- 2. MAP FILTER REDUCE PIPELINE -->
+  <section>
+    <div class="section-title">02 · Pipeline: map → filter → reduce</div>
+    <div class="card">
+      <h2>Transformación en cadena</h2>
+      <p class="desc">Los métodos funcionales se pueden encadenar para transformar datos paso a paso sin mutar el original.</p>
+      <div id="pipeline"></div>
+    </div>
+  </section>
+
+  <!-- 3. MÉTODOS DE REFERENCIA -->
+  <section>
+    <div class="section-title">03 · Métodos esenciales de Array</div>
+    <div class="card">
+      <h2>Guía rápida</h2>
+      <p class="desc">Los métodos más usados con su descripción y si mutan o no el array original.</p>
+      <div class="methods-ref" id="methods-ref"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 04 — Arreglos<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

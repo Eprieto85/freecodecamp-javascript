@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown Studio — Convertidor a HTML</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Markdown <span>Studio</span></h1>
+  <div class="tb-badges">
+    <span class="tb-badge md">Markdown</span>
+    <span class="tb-badge html">HTML</span>
+  </div>
+  <div class="tb-actions">
+    <button class="tb-btn" onclick="toggleView()">Vista HTML</button>
+    <button class="tb-btn" onclick="copyHTML()">Copiar HTML</button>
+    <button class="tb-btn primary" onclick="downloadHTML()">⬇ Descargar HTML</button>
+  </div>
+</div>
+
+<div class="toolbar">
+  <button class="fmt-btn" onclick="fmt('**','**')" title="Negrita"><strong>B</strong></button>
+  <button class="fmt-btn" onclick="fmt('*','*')" title="Cursiva"><em>I</em></button>
+  <button class="fmt-btn" onclick="fmt('~~','~~')" title="Tachado"><s>S</s></button>
+  <button class="fmt-btn" onclick="fmt('`','`')" title="Código inline">code</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="fmtLine('# ')" title="H1">H1</button>
+  <button class="fmt-btn" onclick="fmtLine('## ')" title="H2">H2</button>
+  <button class="fmt-btn" onclick="fmtLine('### ')" title="H3">H3</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="fmtLine('- ')" title="Lista">• Lista</button>
+  <button class="fmt-btn" onclick="fmtLine('> ')" title="Cita">❝ Cita</button>
+  <button class="fmt-btn" onclick="fmtLine('---')" title="Separador">— HR</button>
+  <button class="fmt-btn" onclick="insertLink()" title="Enlace">🔗 Link</button>
+  <button class="fmt-btn" onclick="insertCode()" title="Bloque código">&lt;/&gt; Bloque</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="loadExample()">📄 Ejemplo</button>
+  <button class="fmt-btn" onclick="clearAll()" style="color:var(--accent3)">✕ Limpiar</button>
+</div>
+
+<div class="split">
+  <div class="pane">
+    <div class="pane-header"><span class="dot blue"></span>Markdown</div>
+    <textarea id="md-input" spellcheck="false" placeholder="Escribe tu Markdown aquí...&#10;&#10;# Título principal&#10;## Subtítulo&#10;&#10;Texto con **negrita** e *italica*.&#10;&#10;- Elemento 1&#10;- Elemento 2"></textarea>
+  </div>
+  <div class="pane">
+    <div class="pane-header" id="preview-label"><span class="dot green"></span>Vista Previa</div>
+    <div class="preview-wrap" id="preview-pane"></div>
+    <pre id="html-output"></pre>
+  </div>
+</div>
+
+<div class="statusbar">
+  <span id="stat-chars">0 caracteres</span>
+  <span id="stat-words">0 palabras</span>
+  <span id="stat-lines">0 líneas</span>
+  <span id="stat-time">~0 min lectura</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<footer class="ep-footer"><div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+</body>
+</html>

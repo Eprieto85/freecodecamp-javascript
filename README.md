@@ -1,4 +1,4 @@
-﻿# freeCodeCamp JavaScript — Edisson Prieto
+# freeCodeCamp JavaScript — Edisson Prieto
 
 Interactive JavaScript labs, concept showcases and mini-apps built while completing the freeCodeCamp **JavaScript Algorithms and Data Structures (v9)** certification. Every piece runs in the browser: click **▶ View** and try it.
 
@@ -58,17 +58,17 @@ One interactive page per curriculum module, explaining the concepts with live ex
 
 | # | Showcase | Live Demo | Module |
 |---|----------|-----------|--------|
-| 01 | [Variables & Strings](./showcases/01-variables.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/01-variables.html) | Variables and strings |
-| 02 | [Booleans & Numbers](./showcases/02-booleans.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/02-booleans.html) | Booleans and numbers |
-| 03 | [Functions](./showcases/03-functions.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/03-functions.html) | Functions |
-| 04 | [Arrays](./showcases/04-arrays.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/04-arrays.html) | Arrays |
-| 05 | [Objects](./showcases/05-objects.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/05-objects.html) | Objects |
-| 06 | [Loops](./showcases/06-loops.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/06-loops.html) | Loops |
-| 07 | [Fundamentals](./showcases/07-fundamentals.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/07-fundamentals.html) | JavaScript fundamentals review |
-| 08 | [Higher-Order Functions](./showcases/08-hof.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/08-hof.html) | `map`, `filter`, `reduce` |
-| 09 | [DOM & Events](./showcases/09-dom.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/09-dom.html) | DOM manipulation and events |
-| 10 | [Accessibility](./showcases/10-a11y.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/10-a11y.html) | ARIA and accessible JavaScript |
-| 11 | [Debugging](./showcases/11-debug.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/11-debug.html) | Debugging techniques |
+| 01 | [Variables & Strings](./showcases/01-variables/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/01-variables/) | Variables and strings |
+| 02 | [Booleans & Numbers](./showcases/02-booleans/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/02-booleans/) | Booleans and numbers |
+| 03 | [Functions](./showcases/03-functions/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/03-functions/) | Functions |
+| 04 | [Arrays](./showcases/04-arrays/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/04-arrays/) | Arrays |
+| 05 | [Objects](./showcases/05-objects/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/05-objects/) | Objects |
+| 06 | [Loops](./showcases/06-loops/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/06-loops/) | Loops |
+| 07 | [Fundamentals](./showcases/07-fundamentals/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/07-fundamentals/) | JavaScript fundamentals review |
+| 08 | [Higher-Order Functions](./showcases/08-hof/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/08-hof/) | `map`, `filter`, `reduce` |
+| 09 | [DOM & Events](./showcases/09-dom/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/09-dom/) | DOM manipulation and events |
+| 10 | [Accessibility](./showcases/10-a11y/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/10-a11y/) | ARIA and accessible JavaScript |
+| 11 | [Debugging](./showcases/11-debug/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/11-debug/) | Debugging techniques |
 
 ---
 
@@ -78,11 +78,11 @@ Larger projects that combine several concepts.
 
 | # | App | Live Demo | Description | Concepts |
 |---|-----|-----------|-------------|----------|
-| 01 | [Markdown Studio](./projects/01-markdown-converter.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/01-markdown-converter.html) | Live Markdown to HTML converter | Regex, string replace |
-| 02 | [RhythmBox](./projects/02-beat-machine.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/02-beat-machine.html) | Step sequencer and drum machine | Web Audio, timers |
-| 03 | [VotaYa](./projects/03-voting-system.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/03-voting-system.html) | Create polls and vote with live result bars | Objects, DOM, events |
-| 04 | [FinanzApp](./projects/04-bank-account.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/04-bank-account.html) | Account manager with deposits and withdrawals | Classes, state |
-| 05 | [SortLab](./projects/05-sorting-visualizer.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/05-sorting-visualizer.html) | Step-by-step Bubble Sort visualizer | Algorithms, DOM, functional style |
+| 01 | [Markdown Studio](./projects/01-markdown-converter/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/01-markdown-converter/) | Live Markdown to HTML converter | Regex, string replace |
+| 02 | [RhythmBox](./projects/02-beat-machine/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/02-beat-machine/) | Step sequencer and drum machine | Web Audio, timers |
+| 03 | [VotaYa](./projects/03-voting-system/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/03-voting-system/) | Create polls and vote with live result bars | Objects, DOM, events |
+| 04 | [FinanzApp](./projects/04-bank-account/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/04-bank-account/) | Account manager with deposits and withdrawals | Classes, state |
+| 05 | [SortLab](./projects/05-sorting-visualizer/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/05-sorting-visualizer/) | Step-by-step Bubble Sort visualizer | Algorithms, DOM, functional style |
 
 ---
 

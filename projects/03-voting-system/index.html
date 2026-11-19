@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VotaYa — Sistema de Votación</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>VotaYa</h1>
+    <p>Sistema de votación interactivo — crea, vota y visualiza resultados en tiempo real</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('polls')">📊 Encuestas Activas</button>
+    <button class="tab" onclick="showTab('results')">🏆 Resultados</button>
+    <button class="tab" onclick="showTab('create')">➕ Crear Encuesta</button>
+  </div>
+
+  <!-- POLLS TAB -->
+  <div class="panel active" id="tab-polls">
+    <div class="poll-grid" id="polls-grid"></div>
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div class="panel" id="tab-results">
+    <div class="poll-grid" id="results-grid"></div>
+  </div>
+
+  <!-- CREATE TAB -->
+  <div class="panel" id="tab-create">
+    <div class="create-form">
+      <h2>Nueva Encuesta</h2>
+      <div class="form-group">
+        <label>Pregunta</label>
+        <input type="text" id="new-question" placeholder="¿Cuál es tu lenguaje favorito?"/>
+      </div>
+      <div class="form-group">
+        <label>Categoría</label>
+        <select id="new-category">
+          <option>Tecnología</option>
+          <option>Educación</option>
+          <option>Entretenimiento</option>
+          <option>Deportes</option>
+          <option>General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Opciones</label>
+        <div class="options-list" id="options-list">
+          <div class="opt-input-row"><input type="text" placeholder="Opción 1"/><button class="btn-rm" onclick="removeOpt(this)">✕</button></div>
+          <div class="opt-input-row"><input type="text" placeholder="Opción 2"/><button class="btn-rm" onclick="removeOpt(this)">✕</button></div>
+        </div>
+        <button class="btn-add-opt" onclick="addOpt()">+ Agregar opción</button>
+      </div>
+      <button class="submit-btn" onclick="createPoll()">Publicar Encuesta</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<footer class="ep-footer"><div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+</body>
+</html>

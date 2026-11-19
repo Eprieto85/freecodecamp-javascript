@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Ciclos — Módulo 06</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 06 · JavaScript</div>
+  <h1><span>Ciclos</span> en JavaScript</h1>
+  <p>for, while, do...while, for...of y for...in — cuándo y cómo usar cada uno.</p>
+</header>
+<main>
+
+  <!-- 1. TIPOS DE CICLOS -->
+  <section>
+    <div class="section-title">01 · Los cinco tipos de ciclo</div>
+    <div class="card">
+      <h2>Sintaxis y casos de uso</h2>
+      <p class="desc">Cada ciclo tiene su momento ideal. Aquí puedes ver el código y el output de cada uno.</p>
+      <div class="loop-tabs">
+        <button class="l-tab active" data-tab="for">for</button>
+        <button class="l-tab" data-tab="while">while</button>
+        <button class="l-tab" data-tab="dowhile">do...while</button>
+        <button class="l-tab" data-tab="forof">for...of</button>
+        <button class="l-tab" data-tab="forin">for...in</button>
+      </div>
+      <div class="two-col">
+        <div>
+          <div class="loop-panel active" id="tab-for">
+            <div class="code-block">
+<span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i &lt; <span class="num">5</span>; i++) {
+  <span class="ok">console</span>.log(i);
+}
+<span class="cm">// 0, 1, 2, 3, 4</span>
+<span class="cm">// Usar cuando conoces cuántas veces</span>
+            </div>
+          </div>
+          <div class="loop-panel" id="tab-while">
+            <div class="code-block">
+<span class="kw">let</span> count = <span class="num">0</span>;
+<span class="kw">while</span> (count &lt; <span class="num">5</span>) {
+  <span class="ok">console</span>.log(count);
+  count++;
+}
+<span class="cm">// Usar cuando no sabes cuántas veces</span>
+            </div>
+          </div>
+          <div class="loop-panel" id="tab-dowhile">
+            <div class="code-block">
+<span class="kw">let</span> n = <span class="num">0</span>;
+<span class="kw">do</span> {
+  <span class="ok">console</span>.log(n);
+  n++;
+} <span class="kw">while</span> (n &lt; <span class="num">3</span>);
+<span class="cm">// Siempre ejecuta al menos una vez</span>
+            </div>
+          </div>
+          <div class="loop-panel" id="tab-forof">
+            <div class="code-block">
+<span class="kw">const</span> frutas = [<span class="str">"🍎"</span>, <span class="str">"🍊"</span>, <span class="str">"🍋"</span>];
+<span class="kw">for</span> (<span class="kw">const</span> fruta <span class="kw">of</span> frutas) {
+  <span class="ok">console</span>.log(fruta);
+}
+<span class="cm">// Ideal para arrays e iterables</span>
+            </div>
+          </div>
+          <div class="loop-panel" id="tab-forin">
+            <div class="code-block">
+<span class="kw">const</span> obj = { a:<span class="num">1</span>, b:<span class="num">2</span>, c:<span class="num">3</span> };
+<span class="kw">for</span> (<span class="kw">const</span> key <span class="kw">in</span> obj) {
+  <span class="ok">console</span>.log(key, obj[key]);
+}
+<span class="cm">// Ideal para las claves de un objeto</span>
+            </div>
+          </div>
+        </div>
+        <div class="loop-output" id="loop-output"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. VISUALIZADOR DE TABLA -->
+  <section>
+    <div class="section-title">02 · Generador de tabla de multiplicar</div>
+    <div class="card">
+      <h2>Ciclos anidados en acción</h2>
+      <p class="desc">Genera una tabla de multiplicar usando ciclos for anidados.</p>
+      <div class="stepper-controls">
+        <span style="color:var(--muted);font-size:.88rem">Número:</span>
+        <input class="s-in" id="mult-num" value="7" type="number" min="1" max="20" />
+        <button class="s-btn" onclick="genTable()">Generar tabla</button>
+      </div>
+      <div class="bar-wrap" id="bar-wrap"></div>
+      <div id="table-out" style="font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-top:.8rem;line-height:1.9"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 06 — Ciclos<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Funciones — Módulo 03</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 03 · JavaScript</div>
+  <h1><span>Funciones</span> en JavaScript</h1>
+  <p>Declaraciones, expresiones, arrow functions, parámetros, return y scope.</p>
+</header>
+<main>
+
+  <!-- 1. TIPOS DE FUNCIONES -->
+  <section>
+    <div class="section-title">01 · Tres formas de declarar una función</div>
+    <div class="card">
+      <h2>Sintaxis comparada</h2>
+      <p class="desc">En JavaScript hay varias formas de definir una función. Cada una tiene sus casos de uso.</p>
+      <div class="syntax-grid">
+        <div class="syn-card">
+          <h3>Function Declaration</h3>
+          <div class="code-block">
+<span class="kw">function</span> <span class="fn">sumar</span>(a, b) {
+  <span class="kw">return</span> a + b;
+}
+<span class="cm">// Hoisting: disponible antes de declararse</span>
+<span class="ok">sumar(2, 3); // → 5</span>
+          </div>
+        </div>
+        <div class="syn-card">
+          <h3>Function Expression</h3>
+          <div class="code-block">
+<span class="kw">const</span> <span class="fn">sumar</span> = <span class="kw">function</span>(a, b) {
+  <span class="kw">return</span> a + b;
+};
+<span class="cm">// Sin hoisting — debe declararse antes</span>
+<span class="ok">sumar(2, 3); // → 5</span>
+          </div>
+        </div>
+        <div class="syn-card">
+          <h3>Arrow Function</h3>
+          <div class="code-block">
+<span class="kw">const</span> <span class="fn">sumar</span> = (a, b) <span class="arrow">=&gt;</span> a + b;
+
+<span class="cm">// Sintaxis corta para funciones simples</span>
+<span class="ok">sumar(2, 3); // → 5</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. CALCULADORA INTERACTIVA -->
+  <section>
+    <div class="section-title">02 · Laboratorio — Funciones en acción</div>
+    <div class="card">
+      <h2>Calculadora de Funciones</h2>
+      <p class="desc">Ingresa dos números y aplica cualquier función para ver el resultado y el código que lo genera.</p>
+      <div class="calc-layout">
+        <div>
+          <div class="input-row">
+            <label>a =</label>
+            <input class="n-in" id="num-a" value="12" oninput="updateCalc()" />
+          </div>
+          <div class="input-row">
+            <label>b =</label>
+            <input class="n-in" id="num-b" value="4" oninput="updateCalc()" />
+          </div>
+          <div class="fn-btns" id="fn-btns"></div>
+        </div>
+        <div class="fn-output" id="fn-output">
+          <span style="color:var(--muted)">← Selecciona una función</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. SCOPE -->
+  <section>
+    <div class="section-title">03 · Scope — Alcance de las variables</div>
+    <div class="card">
+      <h2>Global vs Function vs Block Scope</h2>
+      <p class="desc">El scope determina dónde puede accederse a una variable. Visualiza el alcance de cada una.</p>
+      <div class="scope-box global">
+        <span class="scope-label">Global Scope</span>
+        <div class="scope-var"><span class="kw">const</span> <span class="ok">appName</span> = <span class="str">"MiApp"</span>; <span class="cm">// accesible en todo</span></div>
+        <div class="scope-var"><span class="kw">let</span> <span class="ok">usuario</span> = <span class="str">"Edisson"</span>;</div>
+        <div class="scope-box fn-scope">
+          <span class="scope-label">Function Scope</span>
+          <div class="scope-var"><span class="kw">function</span> <span class="fn">saludar</span>() {</div>
+          <div class="scope-var">&nbsp;&nbsp;<span class="kw">const</span> <span class="fn">mensaje</span> = <span class="str">`Hola ${'{'}usuario{'}'}`</span>; <span class="cm">// solo aquí</span></div>
+          <div class="scope-var">&nbsp;&nbsp;<span class="kw">if</span> (<span class="ok">true</span>) {</div>
+          <div class="scope-var">&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">let</span> bloque = <span class="str">"solo en if"</span>; <span class="cm">// block scope</span></div>
+          <div class="scope-var">&nbsp;&nbsp;}</div>
+          <div class="scope-var">&nbsp;&nbsp;<span class="cm">// bloque no accesible aquí</span></div>
+          <div class="scope-var">}</div>
+        </div>
+        <div class="scope-var"><span class="cm">// mensaje no accesible aquí ❌</span></div>
+        <div class="scope-var"><span class="cm">// appName sí accesible aquí ✅</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 03 — Funciones<div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
