@@ -1,76 +1,100 @@
-﻿# freeCodeCamp â€” JavaScript Algorithms & Data Structures
+﻿# freeCodeCamp JavaScript — Edisson Prieto
 
-**Certificacion:** JavaScript Algorithms & Data Structures (v9)
-**Estado:** COMPLETADA â€” Noviembre 2026
-**Credencial:** https://freecodecamp.org/certification/eprieto/javascript-v9
+Interactive JavaScript labs, concept showcases and mini-apps built while completing the freeCodeCamp **JavaScript Algorithms and Data Structures (v9)** certification. Every piece runs in the browser: click **▶ View** and try it.
 
----
+🌐 **Live site:** [eprieto85.github.io/freecodecamp-javascript](https://eprieto85.github.io/freecodecamp-javascript/)
 
-## Labs (29 proyectos)
+> **✅ Certified — November 19, 2026 · [View Certificate](https://freecodecamp.org/certification/eprieto/javascript-v9)**
 
-| # | Proyecto | Descripcion |
-|---|----------|-------------|
-| 01 | greeting-bot | Bot de bienvenida con variables y strings |
-| 02 | trivia-bot | Bot de trivia con funciones |
-| 03 | sentence-generator | Generador de frases con arrays |
-| 04 | teacher-chatbot | Chatbot educativo con objetos |
-| 05 | string-inspector | Inspector de strings |
-| 06 | string-formatter | Formateador de strings |
-| 07 | string-transformer | Transformador de strings |
-| 08 | type-coercion | Demostrador de coercion de tipos |
-| 09 | increment-decrement | Contador con operadores |
-| 10 | logic-verifier | Verificador de logica booleana |
-| 11 | mathbot | Bot matematico |
-| 12 | fortune-teller | Adivino con condicionales |
-| 13 | calculator | Calculadora |
-| 14 | boolean-checker | Verificador booleano |
-| 15 | email-masker | Enmascarador de emails con Regex |
-| 16 | loan-qualifier | Calificador de prestamos |
-| 17 | temp-converter | Conversor de temperatura |
-| 18 | card-counter | Contador de cartas |
-| 19 | leap-year | Detector de ano bisiesto |
-| 20 | truncate-string | Truncador de strings |
-| 21 | confirm-ending | Verificador de finales |
-| 22 | shopping-list | Lista de compras |
-| 23 | lunch-selector | Selector de almuerzo |
-| 24 | golf-score | Marcador de golf |
-| 25 | cargo-manifest | Manifesto de carga |
-| 26 | recipe-tracker | Rastreador de recetas |
-| 27 | quiz-game | Juego de quiz |
-| 28 | record-collection | Coleccion de discos |
-| 29 | artifact-auditor | Auditor de artefactos |
+**Related repository:** [freecodecamp-responsive-web-design](https://github.com/Eprieto85/freecodecamp-responsive-web-design) (Certification 1, HTML & CSS)
 
 ---
 
-## Showcases (demos interactivos por modulo)
+## How this repo was built
 
-| Archivo | Modulo |
-|---------|--------|
-| 01-variables-showcase.html | Variables y tipos |
-| 02-booleans-showcase.html | Booleanos |
-| 03-functions-showcase.html | Funciones |
-| 04-arrays-showcase.html | Arrays |
-| 05-objects-showcase.html | Objetos |
-| 06-loops-showcase.html | Ciclos |
-| 07-fundamentals-showcase.html | Fundamentos JS |
-| 08-hof-showcase.html | Funciones de orden superior |
-| 09-DOM-showcase.html | DOM y eventos |
-| 10-a11y-showcase.html | Accesibilidad |
-| 11-debug-showcase.html | Depuracion |
+The exercises follow the freeCodeCamp curriculum: the base logic and requirements come from the platform's labs and workshops. What I added is the layer on top: a custom interface for each one, extra interaction, and presentation made for a visitor who wants to see the result working. The code was typed and tested by me while solving each exercise on the platform.
 
 ---
 
-## Proyectos Standalone
+## Labs (29)
 
-| Archivo | Descripcion |
-|---------|-------------|
-| 13-markdown-converter.html | Conversor de Markdown a HTML |
-| 17-beat-machine.html | Maquina de ritmos |
-| 19-voting-system.html | Sistema de votacion |
-| 22-bank-account.html | Cuenta bancaria con clases |
+| # | Lab | Live Demo | Concepts |
+|---|-----|-----------|----------|
+| 01 | [Greeting Bot](./labs/js-01-greeting-bot/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-01-greeting-bot/) | `let`, `const`, string concatenation, reassignment |
+| 02 | [Trivia Bot](./labs/js-02-trivia-bot/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-02-trivia-bot/) | Variables, reassignment, multiple `console.log()` |
+| 03 | [Sentence Generator](./labs/js-03-sentence-generator/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-03-sentence-generator/) | String templates, mad-libs pattern |
+| 04 | [Teacher Chatbot](./labs/js-04-teacher-chatbot/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-04-teacher-chatbot/) | Template literals, `.length`, bracket notation, `.indexOf()` |
+| 05 | [String Inspector](./labs/js-05-string-inspector/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-05-string-inspector/) | `.includes()`, `.slice()`, case sensitivity |
+| 06 | [String Formatter](./labs/js-06-string-formatter/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-06-string-formatter/) | `.trim()`, case conversion, camelCase |
+| 07 | [String Transformer](./labs/js-07-string-transformer/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-07-string-transformer/) | `.replace()`, `.replaceAll()`, `.repeat()`, method chaining |
+| 08 | [Type Coercion Debugger](./labs/js-08-type-coercion-debugger/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-08-type-coercion-debugger/) | Type coercion, boolean to number, `null` to 0 |
+| 09 | [Increment & Decrement](./labs/js-09-increment-decrement/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-09-increment-decrement/) | Prefix and postfix `++` / `--`, return order |
+| 10 | [Logic Verifier](./labs/js-10-logic-verifier/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-10-logic-verifier/) | `if` / `else`, boolean conditions |
+| 11 | [MathBot](./labs/js-11-mathbot/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-11-mathbot/) | `Math.random()`, `Math.floor()`, `Math.max()`, `Math.min()` |
+| 12 | [Fortune Teller](./labs/js-12-fortune-teller/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-12-fortune-teller/) | Random values, `if / else if` chains |
+| 13 | [Calculator](./labs/js-13-calculator/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-13-calculator/) | Named functions, parameters, return values |
+| 14 | [Type Detective](./labs/js-14-boolean-checker/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-14-boolean-checker/) | `typeof`, boolean detection |
+| 15 | [Privacy Shield](./labs/js-15-email-masker/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-15-email-masker/) | `.indexOf()`, `.slice()`, `.repeat()`, string building |
+| 16 | [Loan Qualifier](./labs/js-16-loan-qualifier/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-16-loan-qualifier/) | Compound conditions, `&&` |
+| 17 | [Temp Converter](./labs/js-17-temp-converter/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-17-temp-converter/) | Arithmetic formulas, pure functions |
+| 18 | [Card Counter](./labs/js-18-card-counter/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-18-card-counter/) | `switch`, global scope, state across calls |
+| 19 | [Leap Year Calculator](./labs/js-19-leap-year/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-19-leap-year/) | Compound boolean logic, modulo `%` |
+| 20 | [String Truncator](./labs/js-20-truncate-string/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-20-truncate-string/) | `.slice()`, string concatenation |
+| 21 | [Confirm Ending](./labs/js-21-confirm-ending/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-21-confirm-ending/) | `.slice(-n)`, strict equality |
+| 22 | [Shopping List](./labs/js-22-shopping-list/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-22-shopping-list/) | `push()`, `pop()`, `shift()`, `unshift()`, `join()` |
+| 23 | [Lunch Selector](./labs/js-23-lunch-selector/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-23-lunch-selector/) | Array methods, random array element |
+| 24 | [Golf Score](./labs/js-24-golf-score/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-24-golf-score/) | Arrays as lookup tables, `if / else if` |
+| 25 | [Cargo Manifest Validator](./labs/js-25-cargo-manifest/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-25-cargo-manifest/) | Objects, validation, `Number.isInteger()`, spread |
+| 26 | [Recipe Tracker](./labs/js-26-recipe-tracker/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-26-recipe-tracker/) | Objects and arrays, computed values |
+| 27 | [Quiz Game](./labs/js-27-quiz-game/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-27-quiz-game/) | Arrays of objects, random selection |
+| 28 | [Record Collection](./labs/js-28-record-collection/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-28-record-collection/) | Bracket notation, `delete`, CRUD pattern |
+| 29 | [Artifact Provenance Auditor](./labs/js-29-artifact-auditor/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/labs/js-29-artifact-auditor/) | Nested objects, optional chaining `?.` |
 
 ---
 
-## Guias de Estudio (30 modulos)
+## Showcases (11)
 
-Archivos GUIA-*.md con teoria, talleres paso a paso, laboratorios y quizzes.
+One interactive page per curriculum module, explaining the concepts with live examples.
+
+| # | Showcase | Live Demo | Module |
+|---|----------|-----------|--------|
+| 01 | [Variables & Strings](./showcases/01-variables.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/01-variables.html) | Variables and strings |
+| 02 | [Booleans & Numbers](./showcases/02-booleans.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/02-booleans.html) | Booleans and numbers |
+| 03 | [Functions](./showcases/03-functions.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/03-functions.html) | Functions |
+| 04 | [Arrays](./showcases/04-arrays.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/04-arrays.html) | Arrays |
+| 05 | [Objects](./showcases/05-objects.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/05-objects.html) | Objects |
+| 06 | [Loops](./showcases/06-loops.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/06-loops.html) | Loops |
+| 07 | [Fundamentals](./showcases/07-fundamentals.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/07-fundamentals.html) | JavaScript fundamentals review |
+| 08 | [Higher-Order Functions](./showcases/08-hof.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/08-hof.html) | `map`, `filter`, `reduce` |
+| 09 | [DOM & Events](./showcases/09-dom.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/09-dom.html) | DOM manipulation and events |
+| 10 | [Accessibility](./showcases/10-a11y.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/10-a11y.html) | ARIA and accessible JavaScript |
+| 11 | [Debugging](./showcases/11-debug.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/showcases/11-debug.html) | Debugging techniques |
+
+---
+
+## Mini-Apps (5)
+
+Larger projects that combine several concepts.
+
+| # | App | Live Demo | Description | Concepts |
+|---|-----|-----------|-------------|----------|
+| 01 | [Markdown Studio](./projects/01-markdown-converter.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/01-markdown-converter.html) | Live Markdown to HTML converter | Regex, string replace |
+| 02 | [RhythmBox](./projects/02-beat-machine.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/02-beat-machine.html) | Step sequencer and drum machine | Web Audio, timers |
+| 03 | [VotaYa](./projects/03-voting-system.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/03-voting-system.html) | Create polls and vote with live result bars | Objects, DOM, events |
+| 04 | [FinanzApp](./projects/04-bank-account.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/04-bank-account.html) | Account manager with deposits and withdrawals | Classes, state |
+| 05 | [SortLab](./projects/05-sorting-visualizer.html) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/projects/05-sorting-visualizer.html) | Step-by-step Bubble Sort visualizer | Algorithms, DOM, functional style |
+
+---
+
+## Skills Demonstrated
+
+- Variables, strings, numbers, booleans, type coercion
+- Functions, scope, arrays, objects, loops
+- Higher-order functions, DOM manipulation, events, accessibility
+- Debugging, regular expressions, form validation, dates
+- Classes, recursion, data structures, algorithms
+- Functional programming and asynchronous JavaScript
+
+## Author
+
+**Edisson Prieto** — [@Eprieto85](https://github.com/Eprieto85) on GitHub · [@eprieto](https://www.freecodecamp.org/eprieto) on freeCodeCamp

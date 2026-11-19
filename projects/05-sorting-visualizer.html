@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SortLab — Bubble Sort Visualizer</title>
+  <style>
+    :root{--bg:#0b0e17;--surface:#131722;--surface2:#1c2130;--border:#263046;--accent:#6c63ff;--accent2:#ff6584;--accent3:#43e97b;--text:#e8eaf0;--muted:#8b93b0;--radius:10px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:2rem 1rem}
+    .container{max-width:900px;margin:0 auto}
+    .header{text-align:center;margin-bottom:1.8rem}
+    .header h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .header p{color:var(--muted);font-size:.88rem;margin-top:.4rem}
+    .controls{display:flex;justify-content:center;gap:.8rem;margin-bottom:1.5rem}
+    button{border:none;border-radius:8px;color:#fff;cursor:pointer;font-size:.9rem;font-weight:700;padding:.65rem 1.4rem;transition:opacity .15s}
+    button:hover{opacity:.85}
+    #generate-btn{background:var(--accent)}
+    #sort-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));display:none}
+    #array-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;display:flex;flex-direction:column;gap:.7rem;min-height:120px}
+    #array-container>div{display:flex;gap:.6rem;justify-content:center;padding:.35rem;border-radius:8px}
+    #array-container span{background:var(--surface2);border:2px solid transparent;border-radius:8px;font-size:1.05rem;font-weight:700;min-width:3.2rem;padding:.55rem .8rem;text-align:center}
+    #starting-array span{border-color:var(--accent)}
+    .hint{color:var(--muted);font-size:.8rem;text-align:center;margin-top:1rem}
+    .note{border-top:1px solid var(--border);color:var(--muted);font-size:.74rem;margin-top:2rem;padding-top:1rem;text-align:center;line-height:1.6}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>SortLab</h1>
+      <p>Bubble Sort, step by step. Each row is one comparison.</p>
+    </div>
+
+    <div class="controls">
+      <button id="generate-btn">Generate Array</button>
+      <button id="sort-btn">Sort Array</button>
+    </div>
+
+    <div id="array-container">
+      <div id="starting-array"></div>
+    </div>
+
+    <p class="hint">Red dashed border: elements being compared. Green border: final sorted array.</p>
+
+    <p class="note">
+      Based on the freeCodeCamp "Build a Sorting Visualizer" lab (JavaScript Algorithms and Data Structures v9).
+      The base logic follows the platform's lab; the interface and styling were redesigned.
+    </p>
+  </div>
+
+  <script>
+    "use strict";
+
+    const arrayContainer = document.getElementById("array-container");
+    const generateArrayBtn = document.getElementById("generate-btn");
+    const sortArrayBtn = document.getElementById("sort-btn");
+    const arrayLength = 5;
+    const minVal = 1;
+    const maxVal = 100;
+
+    const isStart = () => arrayContainer.children.length === 1;
+
+    const clearArrayContainer = () => {
+      arrayContainer.innerHTML = '<div id="starting-array"></div>';
+    };
+
+    const showSortBtn = () => {
+      sortArrayBtn.style.display = "inline-block";
+    };
+
+    const hideSortBtn = () => {
+      sortArrayBtn.style.display = "none";
+    };
+
+    const generateElement = () => Math.floor(Math.random() * maxVal + minVal);
+
+    const generateArray = () => Array.from({ length: arrayLength }, generateElement);
+
+    const fillArrContainer = (container, arr) => {
+      container.innerHTML = "";
+      arr.forEach(i => {
+        const el = document.createElement("span");
+        el.innerText = i;
+        el.id = `number-${i}`;
+        container.appendChild(el);
+      });
+    };
+
+    const isOrdered = (el1, el2) => el1 <= el2;
+
+    const swapElements = (arr, n = 0) => {
+      if (n < arr.length - 1 && !isOrdered(arr[n], arr[n + 1])) {
+        const temp = arr[n];
+        arr[n] = arr[n + 1];
+        arr[n + 1] = temp;
+      }
+    };
+
+    const getLastChildren = () => arrayContainer.lastElementChild;
+
+    const getLastArr = () => {
+      const els = Array.from(getLastChildren().children);
+      return els.map(el => Number(el.id.replace("number-", "")));
+    };
+
+    const generateContainer = () => {
+      const container = document.createElement("div");
+      arrayContainer.appendChild(container);
+      return container;
+    };
+
+    const highlightCurrentEls = (container, n = 0) => {
+      const children = container.children;
+      if (children[n]) children[n].style.border = "2px dashed red";
+      if (children[n + 1]) children[n + 1].style.border = "2px dashed red";
+    };
+
+    const highlightSorted = () => {
+      getLastChildren().style.border = "4px solid green";
+    };
+
+    const bubbleSort = () => {
+      let swapped = true;
+      while (swapped) {
+        const startingArr = getLastArr();
+        startingArr.forEach((_, i) => {
+          if (i + 1 < arrayLength) {
+            highlightCurrentEls(getLastChildren(), i);
+            const arr = getLastArr();
+            swapElements(arr, i);
+            fillArrContainer(generateContainer(), arr);
+          }
+        });
+        const lastArr = getLastArr();
+        if (startingArr.every((el, i) => el === lastArr[i])) {
+          swapped = false;
+        }
+      }
+    };
+
+    generateArrayBtn.addEventListener("click", () => {
+      if (!isStart()) {
+        clearArrayContainer();
+      }
+      fillArrContainer(document.getElementById("starting-array"), generateArray());
+      showSortBtn();
+    });
+
+    sortArrayBtn.addEventListener("click", () => {
+      bubbleSort();
+      highlightSorted();
+      hideSortBtn();
+    });
+  </script>
+</body>
+</html>
