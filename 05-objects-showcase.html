@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Objetos — Módulo 05</title>
+  <style>
+    :root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3e;--accent:#1abc9c;--accent2:#3498db;--accent3:#f39c12;--accent4:#e74c3c;--text:#e8eaf0;--muted:#8b90a4;--code-bg:#0d1117;--radius:12px;--mono:'Courier New',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+    header{background:linear-gradient(135deg,#1a1d27,#0f1117);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center}
+    .badge{display:inline-block;background:var(--accent);color:#111;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem}
+    header h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;margin-bottom:.6rem}
+    header h1 span{color:var(--accent)}
+    header p{color:var(--muted);font-size:.95rem;max-width:520px;margin:0 auto;line-height:1.6}
+    main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;gap:2rem}
+    .section-title{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+    .card h2{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+    .desc{color:var(--muted);font-size:.88rem;margin-bottom:1.4rem;line-height:1.6}
+    /* contact card */
+    .contact-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    @media(max-width:580px){.contact-layout{grid-template-columns:1fr}}
+    .contact-form{display:flex;flex-direction:column;gap:.6rem}
+    .c-label{font-size:.78rem;color:var(--muted);margin-bottom:.2rem}
+    .c-in{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;padding:.55rem .9rem;color:var(--text);font-size:.9rem;outline:none}
+    .c-in:focus{border-color:var(--accent)}
+    .contact-preview{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:1.2rem;font-family:var(--mono);font-size:.8rem;line-height:2}
+    .prop-key{color:var(--accent3)} .prop-val{color:#9ecbff} .prop-num{color:#79b8ff}
+    /* obj methods demo */
+    .obj-btn{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;color:var(--accent);font-family:var(--mono);font-size:.8rem;padding:.5rem .9rem;cursor:pointer;transition:border-color .2s;margin:.3rem}
+    .obj-btn:hover{border-color:var(--accent)}
+    .obj-output{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:1rem;font-family:var(--mono);font-size:.82rem;min-height:60px;color:var(--accent);margin-top:1rem}
+    /* destructuring */
+    .destr-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:580px){.destr-grid{grid-template-columns:1fr}}
+    .code-block{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;font-family:var(--mono);font-size:.82rem;line-height:1.9;overflow-x:auto}
+    .kw{color:#f97583} .fn{color:var(--accent3)} .cm{color:#6a737d} .ok{color:var(--accent)} .str{color:#9ecbff}
+    footer{text-align:center;padding:2rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 05 · JavaScript</div>
+  <h1><span>Objetos</span> en JavaScript</h1>
+  <p>Creación, acceso, métodos, desestructuración y patrones con objetos JS.</p>
+</header>
+<main>
+
+  <!-- 1. CONTACT CARD BUILDER -->
+  <section>
+    <div class="section-title">01 · Laboratorio — Constructor de tarjeta de contacto</div>
+    <div class="card">
+      <h2>Objeto de Contacto en Tiempo Real</h2>
+      <p class="desc">Llena el formulario y observa cómo se construye el objeto JavaScript en tiempo real.</p>
+      <div class="contact-layout">
+        <div class="contact-form">
+          <div><div class="c-label">nombre</div><input class="c-in" id="c-name" value="Edisson Prieto" oninput="updateContact()" /></div>
+          <div><div class="c-label">profesion</div><input class="c-in" id="c-job" value="Desarrollador Web" oninput="updateContact()" /></div>
+          <div><div class="c-label">ciudad</div><input class="c-in" id="c-city" value="Bogotá" oninput="updateContact()" /></div>
+          <div><div class="c-label">email</div><input class="c-in" id="c-email" value="edisson@dev.co" oninput="updateContact()" /></div>
+          <div><div class="c-label">edad</div><input class="c-in" id="c-age" value="30" type="number" oninput="updateContact()" /></div>
+        </div>
+        <div class="contact-preview" id="contact-preview"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. OBJECT METHODS -->
+  <section>
+    <div class="section-title">02 · Métodos del objeto — Object.keys / values / entries</div>
+    <div class="card">
+      <h2>Explorador de métodos Object</h2>
+      <p class="desc">Aplica los métodos más usados sobre el objeto de contacto que creaste.</p>
+      <div>
+        <button class="obj-btn" onclick="objMethod('keys')">Object.keys()</button>
+        <button class="obj-btn" onclick="objMethod('values')">Object.values()</button>
+        <button class="obj-btn" onclick="objMethod('entries')">Object.entries()</button>
+        <button class="obj-btn" onclick="objMethod('assign')">Object.assign()</button>
+        <button class="obj-btn" onclick="objMethod('spread')">Spread {...obj}</button>
+        <button class="obj-btn" onclick="objMethod('freeze')">Object.freeze()</button>
+      </div>
+      <div class="obj-output" id="obj-output">← Selecciona un método</div>
+    </div>
+  </section>
+
+  <!-- 3. DESTRUCTURING -->
+  <section>
+    <div class="section-title">03 · Desestructuración de objetos y arrays</div>
+    <div class="card">
+      <h2>Sintaxis de Destructuring</h2>
+      <p class="desc">La desestructuración extrae valores de objetos y arrays en variables de forma concisa.</p>
+      <div class="destr-grid">
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">Objeto</div>
+          <div class="code-block">
+<span class="kw">const</span> persona = {
+  <span class="prop-key">nombre</span>: <span class="str">"Edisson"</span>,
+  <span class="prop-key">ciudad</span>: <span class="str">"Bogotá"</span>,
+  <span class="prop-key">edad</span>: <span class="prop-num">30</span>
+};
+
+<span class="cm">// Desestructuración</span>
+<span class="kw">const</span> { nombre, ciudad } = persona;
+<span class="ok">// nombre → "Edisson"</span>
+<span class="ok">// ciudad → "Bogotá"</span>
+
+<span class="cm">// Con alias</span>
+<span class="kw">const</span> { nombre: <span class="fn">n</span> } = persona;
+<span class="ok">// n → "Edisson"</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem">Array</div>
+          <div class="code-block">
+<span class="kw">const</span> colores = [
+  <span class="str">"rojo"</span>, <span class="str">"verde"</span>, <span class="str">"azul"</span>
+];
+
+<span class="cm">// Desestructuración</span>
+<span class="kw">const</span> [primero, , tercero] = colores;
+<span class="ok">// primero → "rojo"</span>
+<span class="ok">// tercero → "azul"</span>
+
+<span class="cm">// Rest operator</span>
+<span class="kw">const</span> [head, ...rest] = colores;
+<span class="ok">// rest → ["verde","azul"]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 05 — Objetos</footer>
+<script>
+  let contactObj = {};
+  function updateContact() {
+    contactObj = {
+      nombre: document.getElementById('c-name').value,
+      profesion: document.getElementById('c-job').value,
+      ciudad: document.getElementById('c-city').value,
+      email: document.getElementById('c-email').value,
+      edad: parseInt(document.getElementById('c-age').value)||0,
+    };
+    const lines = [
+      `<span style="color:#6a737d">const</span> contacto = {`,
+      ...Object.entries(contactObj).map(([k,v]) =>
+        `  <span class="prop-key">${k}</span>: ${typeof v==='string'?`<span class="prop-val">"${v}"</span>`:`<span class="prop-num">${v}</span>`},`
+      ),
+      `};`
+    ];
+    document.getElementById('contact-preview').innerHTML = lines.join('\n');
+  }
+  updateContact();
+
+  function objMethod(m) {
+    const out = document.getElementById('obj-output');
+    let res;
+    switch(m) {
+      case 'keys':    res = JSON.stringify(Object.keys(contactObj)); break;
+      case 'values':  res = JSON.stringify(Object.values(contactObj)); break;
+      case 'entries': res = Object.entries(contactObj).map(([k,v])=>`[${k}, ${v}]`).join('\n'); break;
+      case 'assign':  res = JSON.stringify(Object.assign({}, contactObj, { activo: true })); break;
+      case 'spread':  res = JSON.stringify({ ...contactObj, timestamp: Date.now() }); break;
+      case 'freeze':  res = 'Object.freeze(contacto)\n→ Ya no se pueden agregar, editar ni eliminar propiedades'; break;
+    }
+    out.textContent = res;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Booleanos &amp; Números — Módulo 02</title>
+  <style>
+    :root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3e;--accent:#2ecc71;--accent2:#e74c3c;--accent3:#f39c12;--accent4:#3498db;--text:#e8eaf0;--muted:#8b90a4;--code-bg:#0d1117;--radius:12px;--mono:'Courier New',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+    header{background:linear-gradient(135deg,#1a1d27,#0f1117);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center}
+    .badge{display:inline-block;background:var(--accent);color:#111;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem}
+    header h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;margin-bottom:.6rem}
+    header h1 span{color:var(--accent)}
+    header p{color:var(--muted);font-size:.95rem;max-width:520px;margin:0 auto;line-height:1.6}
+    main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;gap:2rem}
+    .section-title{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+    .card h2{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+    .desc{color:var(--muted);font-size:.88rem;margin-bottom:1.4rem;line-height:1.6}
+    /* comparison table */
+    .cmp-table{width:100%;border-collapse:collapse;font-size:.85rem}
+    .cmp-table th{background:var(--code-bg);padding:.7rem 1rem;text-align:left;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border)}
+    .cmp-table td{padding:.65rem 1rem;border-bottom:1px solid var(--border);font-family:var(--mono)}
+    .cmp-table tr:last-child td{border-bottom:none}
+    .true{color:var(--accent)} .false{color:var(--accent2)}
+    /* boolean tester */
+    .bool-row{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:.8rem}
+    .num-in{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;padding:.5rem .8rem;color:var(--text);font-family:var(--mono);font-size:.95rem;width:90px;outline:none;text-align:center}
+    .num-in:focus{border-color:var(--accent)}
+    .op-sel{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;padding:.5rem .8rem;color:var(--text);font-family:var(--mono);font-size:.95rem;outline:none;cursor:pointer}
+    .bool-result{font-family:var(--mono);font-size:1.2rem;font-weight:700;padding:.4rem 1rem;border-radius:7px;min-width:80px;text-align:center}
+    .bool-result.t{background:rgba(46,204,113,.15);color:var(--accent)}
+    .bool-result.f{background:rgba(231,76,60,.15);color:var(--accent2)}
+    /* math calc */
+    .calc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem}
+    .calc-card{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+    .calc-card .label{font-size:.75rem;color:var(--muted);margin-bottom:.4rem;font-family:var(--mono)}
+    .calc-card .value{font-size:1.1rem;font-weight:700;color:var(--accent3);font-family:var(--mono)}
+    .run-btn{background:var(--accent);color:#111;border:none;border-radius:7px;padding:.6rem 1.4rem;font-size:.88rem;font-weight:700;cursor:pointer;transition:opacity .2s;margin-top:.8rem}
+    .run-btn:hover{opacity:.85}
+    /* number input for math demo */
+    .math-inputs{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;align-items:center}
+    footer{text-align:center;padding:2rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 02 · JavaScript</div>
+  <h1>Booleanos <span>&amp;</span> Números</h1>
+  <p>Operadores de comparación, coerción de tipos, operadores lógicos y métodos del objeto Math.</p>
+</header>
+<main>
+
+  <!-- 1. COMPARACIONES -->
+  <section>
+    <div class="section-title">01 · == vs === — Igualdad estricta vs abstracta</div>
+    <div class="card">
+      <h2>Tabla de comparación</h2>
+      <p class="desc">La igualdad abstracta (==) hace coerción de tipos. La estricta (===) no. Siempre usa ===.</p>
+      <table class="cmp-table">
+        <thead><tr><th>Expresión</th><th>==</th><th>===</th><th>Razón</th></tr></thead>
+        <tbody id="cmp-body"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. TESTER -->
+  <section>
+    <div class="section-title">02 · Comparador interactivo</div>
+    <div class="card">
+      <h2>Prueba tus propios valores</h2>
+      <p class="desc">Ingresa dos valores y un operador para ver el resultado booleano.</p>
+      <div class="bool-row">
+        <input class="num-in" id="val-a" value="5" oninput="calcBool()" />
+        <select class="op-sel" id="op-sel" onchange="calcBool()">
+          <option>==</option><option>===</option><option>!=</option>
+          <option>!==</option><option>&gt;</option><option>&lt;</option>
+          <option>&gt;=</option><option>&lt;=</option>
+        </select>
+        <input class="num-in" id="val-b" value="&quot;5&quot;" oninput="calcBool()" />
+        <div class="bool-result" id="bool-result">true</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MATH -->
+  <section>
+    <div class="section-title">03 · Objeto Math — métodos principales</div>
+    <div class="card">
+      <h2>Calculadora Math</h2>
+      <p class="desc">Ingresa un número y ve el resultado de los métodos más usados del objeto Math.</p>
+      <div class="math-inputs">
+        <span style="color:var(--muted);font-size:.88rem">Número:</span>
+        <input class="num-in" id="math-num" value="16.75" style="width:110px" oninput="calcMath()" />
+        <span style="color:var(--muted);font-size:.88rem">Exponente:</span>
+        <input class="num-in" id="math-exp" value="2" style="width:70px" oninput="calcMath()" />
+      </div>
+      <div class="calc-grid" id="calc-grid"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 02 — Booleanos y Números</footer>
+<script>
+  // comparison table
+  const rows = [
+    ['5 == "5"',   true,  false, 'coerción: string → number'],
+    ['0 == false', true,  false, 'coerción: false → 0'],
+    ['null == undefined', true, false, 'caso especial'],
+    ['null === undefined',false,false,'tipos distintos'],
+    ['NaN == NaN', false, false,'NaN no es igual a nada'],
+    ['1 === 1',    true,  true, 'mismo tipo y valor'],
+    ['"a" === "a"',true,  true, 'strings idénticos'],
+  ];
+  const tbody = document.getElementById('cmp-body');
+  rows.forEach(([expr, loose, strict, reason]) => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${expr}</td><td class="${loose?'true':'false'}">${loose}</td><td class="${strict?'true':'false'}">${strict}</td><td style="color:var(--muted);font-size:.8rem">${reason}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  // bool tester
+  function calcBool() {
+    const a = document.getElementById('val-a').value;
+    const b = document.getElementById('val-b').value;
+    const op = document.getElementById('op-sel').value;
+    let res;
+    try { res = eval(`(${a}) ${op} (${b})`); } catch(e) { res = 'error'; }
+    const el = document.getElementById('bool-result');
+    el.textContent = String(res);
+    el.className = 'bool-result ' + (res === true ? 't' : res === false ? 'f' : '');
+  }
+  calcBool();
+
+  // math methods
+  const mathMethods = [
+    { label: 'Math.round(n)', fn: n => Math.round(n) },
+    { label: 'Math.floor(n)', fn: n => Math.floor(n) },
+    { label: 'Math.ceil(n)',  fn: n => Math.ceil(n) },
+    { label: 'Math.abs(n)',   fn: n => Math.abs(n) },
+    { label: 'Math.sqrt(n)',  fn: n => Math.sqrt(n).toFixed(4) },
+    { label: 'Math.pow(n,e)', fn: (n,e) => Math.pow(n,e) },
+    { label: 'Math.max(n,0)', fn: n => Math.max(n,0) },
+    { label: 'Math.min(n,0)', fn: n => Math.min(n,0) },
+    { label: 'Math.trunc(n)', fn: n => Math.trunc(n) },
+    { label: 'Math.sign(n)',  fn: n => Math.sign(n) },
+    { label: 'Math.random()', fn: () => Math.random().toFixed(6) },
+    { label: 'Math.PI',       fn: () => Math.PI.toFixed(6) },
+  ];
+  const grid = document.getElementById('calc-grid');
+  function calcMath() {
+    const n = parseFloat(document.getElementById('math-num').value) || 0;
+    const e = parseFloat(document.getElementById('math-exp').value) || 2;
+    grid.innerHTML = '';
+    mathMethods.forEach(m => {
+      const val = m.fn(n, e);
+      const d = document.createElement('div');
+      d.className = 'calc-card';
+      d.innerHTML = `<div class="label">${m.label}</div><div class="value">${val}</div>`;
+      grid.appendChild(d);
+    });
+  }
+  calcMath();
+</script>
+</body>
+</html>

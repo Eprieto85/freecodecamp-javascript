@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VotaYa — Sistema de Votación</title>
+  <style>
+    :root{--bg:#0b0e17;--surface:#131722;--surface2:#1c2130;--border:#263046;--accent:#6c63ff;--accent2:#ff6584;--accent3:#43e97b;--text:#e8eaf0;--muted:#8b93b0;--radius:10px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;padding:2rem 1rem}
+    .container{max-width:900px;margin:0 auto}
+    /* HEADER */
+    .header{text-align:center;margin-bottom:2rem}
+    .header h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .header p{color:var(--muted);font-size:.88rem;margin-top:.4rem}
+    /* TABS */
+    .tabs{display:flex;border-bottom:2px solid var(--border);margin-bottom:1.5rem;gap:.2rem}
+    .tab{background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;font-size:.88rem;font-weight:600;margin-bottom:-2px;padding:.6rem 1.2rem;transition:all .2s}
+    .tab.active{border-bottom-color:var(--accent);color:var(--accent)}
+    /* PANELS */
+    .panel{display:none}
+    .panel.active{display:block}
+    /* CARDS */
+    .poll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+    .poll-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;transition:border-color .2s}
+    .poll-card:hover{border-color:var(--accent)}
+    .poll-card h3{font-size:.92rem;font-weight:700;margin-bottom:.8rem;line-height:1.4}
+    .poll-status{font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.08em;float:right;margin-left:.5rem}
+    .poll-status.open{background:rgba(67,233,123,.15);color:var(--accent3)}
+    .poll-status.closed{background:rgba(255,101,132,.15);color:var(--accent2)}
+    .option-row{margin:.4rem 0}
+    /* VOTING */
+    .vote-opt{display:flex;align-items:center;gap:.7rem;padding:.5rem;border-radius:6px;cursor:pointer;transition:background .15s;border:1px solid transparent}
+    .vote-opt:hover{background:var(--surface2);border-color:var(--border)}
+    .vote-opt input[type=radio]{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
+    .vote-opt label{cursor:pointer;font-size:.88rem;flex:1}
+    .vote-btn{margin-top:.8rem;background:var(--accent);border:none;border-radius:7px;color:#fff;font-size:.82rem;font-weight:700;padding:.45rem 1.1rem;cursor:pointer;transition:opacity .15s;width:100%}
+    .vote-btn:hover{opacity:.85}
+    /* RESULTS BAR */
+    .result-bar-wrap{margin:.45rem 0}
+    .result-info{display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:.25rem}
+    .result-info .opt-name{color:var(--text)}
+    .result-info .opt-pct{color:var(--muted);font-weight:700}
+    .bar-track{background:var(--surface2);border-radius:4px;height:10px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:4px;transition:width .6s ease;min-width:2px}
+    .total-votes{font-size:.72rem;color:var(--muted);margin-top:.6rem;text-align:right}
+    /* CREATE FORM */
+    .create-form{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;max-width:580px;margin:0 auto}
+    .create-form h2{font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:var(--accent)}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.07em}
+    .form-group input,.form-group textarea,.form-group select{background:var(--surface2);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:.88rem;padding:.6rem .9rem;width:100%;outline:none;transition:border-color .2s;font-family:inherit}
+    .form-group input:focus,.form-group textarea:focus{border-color:var(--accent)}
+    .options-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.7rem}
+    .opt-input-row{display:flex;gap:.5rem}
+    .opt-input-row input{flex:1}
+    .btn-rm{background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--muted);cursor:pointer;font-size:.8rem;padding:.35rem .6rem;transition:all .15s}
+    .btn-rm:hover{border-color:var(--accent2);color:var(--accent2)}
+    .btn-add-opt{background:transparent;border:1px dashed var(--border);border-radius:6px;color:var(--muted);cursor:pointer;font-size:.82rem;padding:.4rem .8rem;transition:all .15s;width:100%;text-align:left}
+    .btn-add-opt:hover{border-color:var(--accent);color:var(--accent)}
+    .submit-btn{background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:8px;color:#fff;cursor:pointer;font-size:.9rem;font-weight:700;padding:.7rem 1.5rem;width:100%;transition:opacity .15s;margin-top:.5rem}
+    .submit-btn:hover{opacity:.88}
+    /* TOAST */
+    .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--accent3);color:#111;padding:.6rem 1.2rem;border-radius:8px;font-size:.85rem;font-weight:700;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;z-index:999}
+    .toast.show{opacity:1;transform:translateY(0)}
+    /* BADGES */
+    .badge{font-size:.7rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;background:rgba(108,99,255,.2);color:var(--accent)}
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>VotaYa</h1>
+    <p>Sistema de votación interactivo — crea, vota y visualiza resultados en tiempo real</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('polls')">📊 Encuestas Activas</button>
+    <button class="tab" onclick="showTab('results')">🏆 Resultados</button>
+    <button class="tab" onclick="showTab('create')">➕ Crear Encuesta</button>
+  </div>
+
+  <!-- POLLS TAB -->
+  <div class="panel active" id="tab-polls">
+    <div class="poll-grid" id="polls-grid"></div>
+  </div>
+
+  <!-- RESULTS TAB -->
+  <div class="panel" id="tab-results">
+    <div class="poll-grid" id="results-grid"></div>
+  </div>
+
+  <!-- CREATE TAB -->
+  <div class="panel" id="tab-create">
+    <div class="create-form">
+      <h2>Nueva Encuesta</h2>
+      <div class="form-group">
+        <label>Pregunta</label>
+        <input type="text" id="new-question" placeholder="¿Cuál es tu lenguaje favorito?"/>
+      </div>
+      <div class="form-group">
+        <label>Categoría</label>
+        <select id="new-category">
+          <option>Tecnología</option>
+          <option>Educación</option>
+          <option>Entretenimiento</option>
+          <option>Deportes</option>
+          <option>General</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Opciones</label>
+        <div class="options-list" id="options-list">
+          <div class="opt-input-row"><input type="text" placeholder="Opción 1"/><button class="btn-rm" onclick="removeOpt(this)">✕</button></div>
+          <div class="opt-input-row"><input type="text" placeholder="Opción 2"/><button class="btn-rm" onclick="removeOpt(this)">✕</button></div>
+        </div>
+        <button class="btn-add-opt" onclick="addOpt()">+ Agregar opción</button>
+      </div>
+      <button class="submit-btn" onclick="createPoll()">Publicar Encuesta</button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── DATA ──
+  let polls = [
+    {id:1, q:'¿Cuál es tu lenguaje de programación favorito?', cat:'Tecnología', open:true,
+     opts:['JavaScript','Python','Java','Rust'], votes:[0,0,0,0], myVote:null,
+     colors:['#6c63ff','#43e97b','#ff6584','#f5a623']},
+    {id:2, q:'¿Qué framework de frontend prefieres?', cat:'Tecnología', open:true,
+     opts:['React','Vue','Angular','Svelte'], votes:[0,0,0,0], myVote:null,
+     colors:['#61dafb','#42b883','#dd0031','#ff3e00']},
+    {id:3, q:'¿Cuántas horas al día dedicas a programar?', cat:'Educación', open:true,
+     opts:['Menos de 1','1-3 horas','3-6 horas','Más de 6'], votes:[0,0,0,0], myVote:null,
+     colors:['#ffd60a','#f5a623','#ff6584','#6c63ff']},
+    {id:4, q:'¿Qué herramienta de control de versiones usas?', cat:'Tecnología', open:false,
+     opts:['Git','SVN','Mercurial','Ninguna'], votes:[18,4,2,3], myVote:0,
+     colors:['#f5a623','#43e97b','#6c63ff','#ff6584']},
+  ];
+  let nextId = 5;
+
+  // ── RENDER ──
+  function renderPolls() {
+    const grid = document.getElementById('polls-grid');
+    const open = polls.filter(p=>p.open);
+    if(!open.length){ grid.innerHTML='<p style="color:var(--muted);padding:1rem">No hay encuestas abiertas.</p>'; return; }
+    grid.innerHTML = open.map(p => `
+      <div class="poll-card">
+        <h3><span class="poll-status open">Abierta</span>${p.q}</h3>
+        <div style="font-size:.7rem;color:var(--muted);margin-bottom:.8rem">${p.cat}</div>
+        ${p.myVote===null ? `
+          <form onsubmit="submitVote(event,${p.id})">
+            ${p.opts.map((o,i)=>`
+              <div class="option-row">
+                <div class="vote-opt">
+                  <input type="radio" name="vote-${p.id}" id="v${p.id}-${i}" value="${i}"/>
+                  <label for="v${p.id}-${i}">${o}</label>
+                </div>
+              </div>`).join('')}
+            <button type="submit" class="vote-btn">Votar →</button>
+          </form>` : `
+          <div>${buildBars(p)}</div>
+          <div class="total-votes">Total: ${p.votes.reduce((a,b)=>a+b,0)} votos</div>
+          <div style="font-size:.72rem;color:var(--accent3);margin-top:.5rem">✓ Ya votaste</div>
+        `}
+      </div>`).join('');
+  }
+
+  function renderResults() {
+    const grid = document.getElementById('results-grid');
+    grid.innerHTML = polls.map(p => `
+      <div class="poll-card">
+        <h3><span class="poll-status ${p.open?'open':'closed'}">${p.open?'Abierta':'Cerrada'}</span>${p.q}</h3>
+        <div style="font-size:.7rem;color:var(--muted);margin-bottom:.8rem">${p.cat}</div>
+        ${buildBars(p)}
+        <div class="total-votes">Total: ${p.votes.reduce((a,b)=>a+b,0)} votos</div>
+        ${p.open?`<button onclick="closePoll(${p.id})" style="margin-top:.8rem;background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--muted);cursor:pointer;font-size:.75rem;padding:.3rem .7rem;transition:all .15s" onmouseover="this.style.borderColor='var(--accent2)'" onmouseout="this.style.borderColor='var(--border)'">Cerrar encuesta</button>`:''}
+      </div>`).join('');
+  }
+
+  function buildBars(p) {
+    const total = p.votes.reduce((a,b)=>a+b,0)||1;
+    const winner = p.votes.indexOf(Math.max(...p.votes));
+    return p.opts.map((o,i)=>{
+      const pct = Math.round(p.votes[i]/total*100);
+      return `<div class="result-bar-wrap">
+        <div class="result-info">
+          <span class="opt-name">${o}${i===winner&&total>1?' 🏆':''}</span>
+          <span class="opt-pct">${pct}% (${p.votes[i]})</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${p.colors[i]}"></div></div>
+      </div>`;
+    }).join('');
+  }
+
+  function submitVote(e, pollId) {
+    e.preventDefault();
+    const form = e.target;
+    const sel = form.querySelector(`input[name="vote-${pollId}"]:checked`);
+    if(!sel){ toast('Selecciona una opción primero'); return; }
+    const p = polls.find(x=>x.id===pollId);
+    p.votes[+sel.value]++;
+    p.myVote = +sel.value;
+    toast('¡Voto registrado!');
+    renderPolls();
+    renderResults();
+  }
+
+  function closePoll(pollId) {
+    polls.find(p=>p.id===pollId).open = false;
+    renderPolls();
+    renderResults();
+    toast('Encuesta cerrada');
+  }
+
+  // ── CREATE ──
+  function addOpt() {
+    const list = document.getElementById('options-list');
+    const count = list.children.length + 1;
+    if(count > 6){ toast('Máximo 6 opciones'); return; }
+    const row = document.createElement('div'); row.className='opt-input-row';
+    row.innerHTML=`<input type="text" placeholder="Opción ${count}"/><button class="btn-rm" onclick="removeOpt(this)">✕</button>`;
+    list.appendChild(row);
+  }
+  function removeOpt(btn) {
+    const list = document.getElementById('options-list');
+    if(list.children.length<=2){ toast('Mínimo 2 opciones'); return; }
+    btn.parentElement.remove();
+  }
+  function createPoll() {
+    const q = document.getElementById('new-question').value.trim();
+    const cat = document.getElementById('new-category').value;
+    const opts = [...document.querySelectorAll('#options-list input')].map(i=>i.value.trim()).filter(Boolean);
+    if(!q){ toast('Escribe una pregunta'); return; }
+    if(opts.length<2){ toast('Agrega al menos 2 opciones'); return; }
+    const palette = ['#6c63ff','#43e97b','#ff6584','#f5a623','#61dafb','#ff3e00'];
+    polls.push({id:nextId++,q,cat,open:true,opts,votes:Array(opts.length).fill(0),myVote:null,colors:palette});
+    document.getElementById('new-question').value='';
+    document.querySelectorAll('#options-list input').forEach(i=>i.value='');
+    toast('¡Encuesta publicada!');
+    showTab('polls');
+  }
+
+  // ── UI ──
+  function showTab(name) {
+    document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['polls','results','create'][i]===name));
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab-'+name).classList.add('active');
+    if(name==='results') renderResults();
+    if(name==='polls') renderPolls();
+  }
+
+  function toast(msg) {
+    const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),2200);
+  }
+
+  // init
+  renderPolls();
+</script>
+</body>
+</html>

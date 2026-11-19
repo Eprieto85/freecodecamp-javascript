@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Markdown Studio — Convertidor a HTML</title>
+  <style>
+    :root{--bg:#0f1117;--panel:#1a1d27;--border:#2a2d3e;--accent:#3498db;--accent2:#2ecc71;--accent3:#f39c12;--text:#e8eaf0;--muted:#8b90a4;--code-bg:#0d1117;--radius:8px;--mono:'Courier New',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden}
+    /* TOP BAR */
+    .topbar{background:var(--panel);border-bottom:1px solid var(--border);padding:.6rem 1.2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+    .topbar h1{font-size:1rem;font-weight:700;color:var(--text)}
+    .topbar h1 span{color:var(--accent)}
+    .tb-badges{display:flex;gap:.4rem;margin-left:.5rem}
+    .tb-badge{font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;text-transform:uppercase;letter-spacing:.08em}
+    .tb-badge.md{background:rgba(52,152,219,.2);color:var(--accent)}
+    .tb-badge.html{background:rgba(46,204,113,.2);color:var(--accent2)}
+    .tb-actions{margin-left:auto;display:flex;gap:.5rem}
+    .tb-btn{background:var(--code-bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:.78rem;padding:.35rem .8rem;cursor:pointer;transition:border-color .2s;white-space:nowrap}
+    .tb-btn:hover{border-color:var(--accent)}
+    .tb-btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+    .tb-btn.primary:hover{opacity:.85}
+    /* TOOLBAR */
+    .toolbar{background:var(--panel);border-bottom:1px solid var(--border);padding:.4rem 1.2rem;display:flex;gap:.3rem;flex-wrap:wrap;align-items:center}
+    .fmt-btn{background:transparent;border:1px solid transparent;border-radius:5px;color:var(--muted);font-size:.82rem;padding:.25rem .55rem;cursor:pointer;font-family:var(--mono);transition:all .15s;white-space:nowrap}
+    .fmt-btn:hover{border-color:var(--border);color:var(--text);background:var(--code-bg)}
+    .sep{width:1px;height:16px;background:var(--border);margin:0 .2rem}
+    /* MAIN SPLIT */
+    .split{flex:1;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+    @media(max-width:680px){.split{grid-template-columns:1fr;grid-template-rows:1fr 1fr}}
+    .pane{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--border)}
+    .pane:last-child{border-right:none}
+    .pane-header{background:var(--panel);padding:.45rem 1rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.5rem}
+    .pane-header .dot{width:7px;height:7px;border-radius:50%}
+    .pane-header .dot.blue{background:var(--accent)}
+    .pane-header .dot.green{background:var(--accent2)}
+    /* EDITOR */
+    #md-input{flex:1;background:var(--code-bg);border:none;color:var(--text);font-family:var(--mono);font-size:.88rem;line-height:1.75;padding:1.2rem;resize:none;outline:none;overflow-y:auto;tab-size:2}
+    /* PREVIEW */
+    .preview-wrap{flex:1;overflow-y:auto;padding:1.5rem 2rem;background:#fff;color:#111}
+    .preview-wrap h1,.preview-wrap h2,.preview-wrap h3,.preview-wrap h4{margin:1.2em 0 .5em;line-height:1.3}
+    .preview-wrap h1{font-size:1.8rem;border-bottom:2px solid #eee;padding-bottom:.3em}
+    .preview-wrap h2{font-size:1.4rem;border-bottom:1px solid #eee;padding-bottom:.2em}
+    .preview-wrap h3{font-size:1.1rem}
+    .preview-wrap p{margin:.8em 0;line-height:1.7}
+    .preview-wrap a{color:#3498db}
+    .preview-wrap code{background:#f4f4f4;border-radius:3px;padding:.1em .35em;font-family:var(--mono);font-size:.88em;color:#c0392b}
+    .preview-wrap pre{background:#2d2d2d;color:#f8f8f2;border-radius:6px;padding:1em 1.2em;overflow-x:auto;margin:1em 0}
+    .preview-wrap pre code{background:none;color:inherit;padding:0;font-size:.85rem}
+    .preview-wrap blockquote{border-left:4px solid #3498db;margin:1em 0;padding:.5em 1em;background:#f0f8ff;color:#555}
+    .preview-wrap ul,.preview-wrap ol{margin:.8em 0 .8em 1.5em;line-height:1.8}
+    .preview-wrap table{border-collapse:collapse;width:100%;margin:1em 0}
+    .preview-wrap th,.preview-wrap td{border:1px solid #ddd;padding:.5rem .8rem;text-align:left}
+    .preview-wrap th{background:#f5f5f5;font-weight:600}
+    .preview-wrap hr{border:none;border-top:2px solid #eee;margin:1.5em 0}
+    .preview-wrap strong{font-weight:700}
+    .preview-wrap em{font-style:italic}
+    .preview-wrap img{max-width:100%;border-radius:4px}
+    /* HTML VIEW */
+    #html-output{flex:1;background:var(--code-bg);color:#9ecbff;font-family:var(--mono);font-size:.82rem;line-height:1.75;padding:1.2rem;overflow-y:auto;white-space:pre-wrap;word-break:break-all;display:none}
+    /* STATUS BAR */
+    .statusbar{background:var(--accent);color:#fff;padding:.25rem 1.2rem;font-size:.7rem;display:flex;gap:1.5rem}
+    /* TOAST */
+    .toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--accent2);color:#111;padding:.6rem 1.2rem;border-radius:7px;font-size:.85rem;font-weight:600;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;z-index:999}
+    .toast.show{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Markdown <span>Studio</span></h1>
+  <div class="tb-badges">
+    <span class="tb-badge md">Markdown</span>
+    <span class="tb-badge html">HTML</span>
+  </div>
+  <div class="tb-actions">
+    <button class="tb-btn" onclick="toggleView()">Vista HTML</button>
+    <button class="tb-btn" onclick="copyHTML()">Copiar HTML</button>
+    <button class="tb-btn primary" onclick="downloadHTML()">⬇ Descargar HTML</button>
+  </div>
+</div>
+
+<div class="toolbar">
+  <button class="fmt-btn" onclick="fmt('**','**')" title="Negrita"><strong>B</strong></button>
+  <button class="fmt-btn" onclick="fmt('*','*')" title="Cursiva"><em>I</em></button>
+  <button class="fmt-btn" onclick="fmt('~~','~~')" title="Tachado"><s>S</s></button>
+  <button class="fmt-btn" onclick="fmt('`','`')" title="Código inline">code</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="fmtLine('# ')" title="H1">H1</button>
+  <button class="fmt-btn" onclick="fmtLine('## ')" title="H2">H2</button>
+  <button class="fmt-btn" onclick="fmtLine('### ')" title="H3">H3</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="fmtLine('- ')" title="Lista">• Lista</button>
+  <button class="fmt-btn" onclick="fmtLine('> ')" title="Cita">❝ Cita</button>
+  <button class="fmt-btn" onclick="fmtLine('---')" title="Separador">— HR</button>
+  <button class="fmt-btn" onclick="insertLink()" title="Enlace">🔗 Link</button>
+  <button class="fmt-btn" onclick="insertCode()" title="Bloque código">&lt;/&gt; Bloque</button>
+  <div class="sep"></div>
+  <button class="fmt-btn" onclick="loadExample()">📄 Ejemplo</button>
+  <button class="fmt-btn" onclick="clearAll()" style="color:var(--accent3)">✕ Limpiar</button>
+</div>
+
+<div class="split">
+  <div class="pane">
+    <div class="pane-header"><span class="dot blue"></span>Markdown</div>
+    <textarea id="md-input" spellcheck="false" placeholder="Escribe tu Markdown aquí...&#10;&#10;# Título principal&#10;## Subtítulo&#10;&#10;Texto con **negrita** e *italica*.&#10;&#10;- Elemento 1&#10;- Elemento 2"></textarea>
+  </div>
+  <div class="pane">
+    <div class="pane-header" id="preview-label"><span class="dot green"></span>Vista Previa</div>
+    <div class="preview-wrap" id="preview-pane"></div>
+    <pre id="html-output"></pre>
+  </div>
+</div>
+
+<div class="statusbar">
+  <span id="stat-chars">0 caracteres</span>
+  <span id="stat-words">0 palabras</span>
+  <span id="stat-lines">0 líneas</span>
+  <span id="stat-time">~0 min lectura</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const input = document.getElementById('md-input');
+  const preview = document.getElementById('preview-pane');
+  const htmlOut = document.getElementById('html-output');
+  let showingHTML = false;
+
+  // ── MARKDOWN PARSER ──
+  function parseMarkdown(md) {
+    let html = md
+      // Escape HTML entities first
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      // Code blocks (before inline)
+      .replace(/```([\s\S]*?)```/g, (_,c) => `<pre><code>${c.trim()}</code></pre>`)
+      // Headings
+      .replace(/^#{6}\s+(.+)$/gm,'<h6>$1</h6>')
+      .replace(/^#{5}\s+(.+)$/gm,'<h5>$1</h5>')
+      .replace(/^#{4}\s+(.+)$/gm,'<h4>$1</h4>')
+      .replace(/^#{3}\s+(.+)$/gm,'<h3>$1</h3>')
+      .replace(/^#{2}\s+(.+)$/gm,'<h2>$1</h2>')
+      .replace(/^#{1}\s+(.+)$/gm,'<h1>$1</h1>')
+      // Blockquote
+      .replace(/^&gt;\s+(.+)$/gm,'<blockquote>$1</blockquote>')
+      // HR
+      .replace(/^---$/gm,'<hr/>')
+      // Bold + Italic
+      .replace(/\*\*\*(.+?)\*\*\*/g,'<strong><em>$1</em></strong>')
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/~~(.+?)~~/g,'<del>$1</del>')
+      // Inline code
+      .replace(/`([^`]+)`/g,'<code>$1</code>')
+      // Links & images
+      .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img alt="$1" src="$2"/>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>')
+      // Unordered list
+      .replace(/(^- .+$(\n^- .+$)*)/gm, m => '<ul>' + m.replace(/^- (.+)$/gm,'<li>$1</li>') + '</ul>')
+      // Ordered list
+      .replace(/(^\d+\. .+$(\n^\d+\. .+$)*)/gm, m => '<ol>' + m.replace(/^\d+\. (.+)$/gm,'<li>$1</li>') + '</ol>')
+      // Paragraphs
+      .replace(/^([^<\n].+)$/gm,'<p>$1</p>')
+      // Clean up empty p tags
+      .replace(/<p><\/p>/g,'')
+      .replace(/<p>(<(?:h[1-6]|ul|ol|blockquote|hr|pre)[^>]*>)/g,'$1')
+      .replace(/(<\/(?:h[1-6]|ul|ol|blockquote|pre)>)<\/p>/g,'$1');
+    return html;
+  }
+
+  function render() {
+    const md = input.value;
+    const html = parseMarkdown(md);
+    preview.innerHTML = html;
+    htmlOut.textContent = html;
+    // stats
+    const words = md.trim() ? md.trim().split(/\s+/).length : 0;
+    document.getElementById('stat-chars').textContent = md.length + ' caracteres';
+    document.getElementById('stat-words').textContent = words + ' palabras';
+    document.getElementById('stat-lines').textContent = md.split('\n').length + ' líneas';
+    document.getElementById('stat-time').textContent = '~' + Math.max(1, Math.round(words/200)) + ' min lectura';
+  }
+
+  input.addEventListener('input', render);
+
+  // ── FORMAT HELPERS ──
+  function fmt(before, after) {
+    const s = input.selectionStart, e = input.selectionEnd;
+    const sel = input.value.slice(s, e) || 'texto';
+    const rep = before + sel + after;
+    input.setRangeText(rep, s, e, 'select');
+    input.focus(); render();
+  }
+  function fmtLine(prefix) {
+    const s = input.selectionStart;
+    const lineStart = input.value.lastIndexOf('\n', s - 1) + 1;
+    input.setRangeText(prefix, lineStart, lineStart, 'end');
+    input.focus(); render();
+  }
+  function insertLink() {
+    const url = prompt('URL del enlace:') || 'https://ejemplo.com';
+    const s = input.selectionStart, e = input.selectionEnd;
+    const txt = input.value.slice(s,e) || 'texto del enlace';
+    input.setRangeText(`[${txt}](${url})`, s, e, 'end');
+    input.focus(); render();
+  }
+  function insertCode() {
+    const s = input.selectionStart, e = input.selectionEnd;
+    const sel = input.value.slice(s,e) || 'código aquí';
+    input.setRangeText('```\n' + sel + '\n```', s, e, 'end');
+    input.focus(); render();
+  }
+
+  // ── VIEW TOGGLE ──
+  function toggleView() {
+    showingHTML = !showingHTML;
+    preview.style.display = showingHTML ? 'none' : 'block';
+    htmlOut.style.display = showingHTML ? 'block' : 'none';
+    document.querySelector('.tb-actions .tb-btn').textContent = showingHTML ? 'Vista Previa' : 'Vista HTML';
+    document.getElementById('preview-label').innerHTML = showingHTML
+      ? '<span class="dot" style="background:var(--accent3)"></span>HTML Generado'
+      : '<span class="dot green"></span>Vista Previa';
+  }
+
+  // ── COPY / DOWNLOAD ──
+  function getFullHTML() {
+    const title = (input.value.match(/^#\s+(.+)$/m) || ['','Documento'])[1];
+    return `<!DOCTYPE html>\n<html lang="es">\n<head>\n  <meta charset="UTF-8"/>\n  <title>${title}</title>\n  <style>body{max-width:800px;margin:2rem auto;font-family:Georgia,serif;line-height:1.7;padding:0 1rem}h1,h2{border-bottom:1px solid #eee;padding-bottom:.3em}code{background:#f4f4f4;padding:.1em .3em;border-radius:3px}pre{background:#2d2d2d;color:#f8f8f2;padding:1em;border-radius:6px;overflow-x:auto}blockquote{border-left:4px solid #3498db;padding:.5em 1em;background:#f0f8ff;margin:1em 0}</style>\n</head>\n<body>\n${parseMarkdown(input.value)}\n</body>\n</html>`;
+  }
+  function copyHTML() {
+    navigator.clipboard.writeText(getFullHTML()).then(() => toast('HTML copiado al portapapeles ✓'));
+  }
+  function downloadHTML() {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([getFullHTML()], {type:'text/html'}));
+    a.download = 'documento.html';
+    a.click();
+    toast('Archivo descargado ✓');
+  }
+  function toast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+  function clearAll() { if(confirm('¿Limpiar todo el contenido?')) { input.value=''; render(); } }
+
+  function loadExample() {
+    input.value = `# Bienvenido a Markdown Studio
+
+## ¿Qué es Markdown?
+
+Markdown es un lenguaje de marcado **ligero** que se convierte fácilmente a *HTML*. Fue creado para que el texto sea ~~complicado~~ fácil de leer y escribir.
+
+## Características principales
+
+- Sintaxis simple e intuitiva
+- Compatible con HTML
+- Ampliamente usado en documentación
+- Soportado por GitHub, Notion, etc.
+
+## Ejemplo de código
+
+\`\`\`
+const convertir = (md) => {
+  return parseMarkdown(md);
+};
+\`\`\`
+
+También puedes usar \`código inline\` dentro del texto.
+
+## Cita destacada
+
+> "La simplicidad es la máxima sofisticación." — Leonardo da Vinci
+
+## Enlace
+
+Visita [freeCodeCamp](https://www.freecodecamp.org) para aprender más.
+
+---
+
+*Generado con Markdown Studio*`;
+    render();
+  }
+
+  // init
+  loadExample();
+</script>
+</body>
+</html>

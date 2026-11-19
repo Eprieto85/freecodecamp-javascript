@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Arreglos — Módulo 04</title>
+  <style>
+    :root{--bg:#0f1117;--card:#1a1d27;--border:#2a2d3e;--accent:#9b59b6;--accent2:#2ecc71;--accent3:#f39c12;--accent4:#3498db;--text:#e8eaf0;--muted:#8b90a4;--code-bg:#0d1117;--radius:12px;--mono:'Courier New',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+    header{background:linear-gradient(135deg,#1a1d27,#0f1117);border-bottom:1px solid var(--border);padding:2.5rem 2rem 2rem;text-align:center}
+    .badge{display:inline-block;background:var(--accent);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem}
+    header h1{font-size:clamp(1.6rem,4vw,2.6rem);font-weight:800;margin-bottom:.6rem}
+    header h1 span{color:var(--accent)}
+    header p{color:var(--muted);font-size:.95rem;max-width:520px;margin:0 auto;line-height:1.6}
+    main{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;display:grid;gap:2rem}
+    .section-title{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem}
+    .section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.8rem}
+    .card h2{font-size:1.1rem;font-weight:700;margin-bottom:.5rem}
+    .desc{color:var(--muted);font-size:.88rem;margin-bottom:1.4rem;line-height:1.6}
+    /* array visualizer */
+    .arr-display{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem;min-height:52px;align-items:center}
+    .arr-item{background:var(--accent);color:#fff;border-radius:7px;padding:.4rem .8rem;font-family:var(--mono);font-size:.88rem;font-weight:600;transition:all .3s;position:relative}
+    .arr-item .idx{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:.65rem;color:var(--muted)}
+    .arr-controls{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1rem}
+    .arr-in{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;padding:.5rem .8rem;color:var(--text);font-family:var(--mono);font-size:.88rem;width:120px;outline:none}
+    .arr-in:focus{border-color:var(--accent)}
+    .a-btn{background:var(--code-bg);border:1px solid var(--border);border-radius:7px;color:var(--accent);font-family:var(--mono);font-size:.8rem;padding:.5rem .9rem;cursor:pointer;transition:border-color .2s}
+    .a-btn:hover{border-color:var(--accent)}
+    .arr-log{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;font-family:var(--mono);font-size:.8rem;min-height:40px;color:var(--accent2);max-height:120px;overflow-y:auto}
+    /* methods reference */
+    .methods-ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.8rem}
+    .m-card{background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem}
+    .m-card .m-name{font-family:var(--mono);color:var(--accent);font-size:.82rem;font-weight:700;margin-bottom:.3rem}
+    .m-card p{font-size:.78rem;color:var(--muted);line-height:1.5}
+    /* pipeline demo */
+    .pipe-step{display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem;flex-wrap:wrap}
+    .pipe-label{font-family:var(--mono);font-size:.8rem;color:var(--accent3);min-width:140px}
+    .pipe-arr{display:flex;gap:.3rem;flex-wrap:wrap}
+    .pipe-item{background:var(--code-bg);border:1px solid var(--border);border-radius:5px;padding:.2rem .5rem;font-family:var(--mono);font-size:.78rem}
+    .pipe-item.hi{border-color:var(--accent2);color:var(--accent2)}
+    .pipe-arrow{color:var(--muted);font-size:1.2rem}
+    footer{text-align:center;padding:2rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+<header>
+  <div class="badge">Módulo 04 · JavaScript</div>
+  <h1><span>Arreglos</span> en JavaScript</h1>
+  <p>Creación, mutación, iteración y transformación de arrays con los métodos más poderosos.</p>
+</header>
+<main>
+
+  <!-- 1. ARRAY VISUALIZER -->
+  <section>
+    <div class="section-title">01 · Visualizador de Array en tiempo real</div>
+    <div class="card">
+      <h2>Manipulador de Array</h2>
+      <p class="desc">Agrega, elimina y modifica elementos del array. Cada operación muestra el índice de cada elemento.</p>
+      <div class="arr-display" id="arr-display"></div>
+      <div class="arr-controls">
+        <input class="arr-in" id="arr-val" placeholder="valor..." />
+        <button class="a-btn" onclick="arrOp('push')">push()</button>
+        <button class="a-btn" onclick="arrOp('pop')">pop()</button>
+        <button class="a-btn" onclick="arrOp('unshift')">unshift()</button>
+        <button class="a-btn" onclick="arrOp('shift')">shift()</button>
+        <button class="a-btn" onclick="arrOp('reverse')">reverse()</button>
+        <button class="a-btn" onclick="arrOp('sort')">sort()</button>
+        <button class="a-btn" onclick="arrOp('reset')">reset</button>
+      </div>
+      <div class="arr-log" id="arr-log">Listo — usa los botones para modificar el array</div>
+    </div>
+  </section>
+
+  <!-- 2. MAP FILTER REDUCE PIPELINE -->
+  <section>
+    <div class="section-title">02 · Pipeline: map → filter → reduce</div>
+    <div class="card">
+      <h2>Transformación en cadena</h2>
+      <p class="desc">Los métodos funcionales se pueden encadenar para transformar datos paso a paso sin mutar el original.</p>
+      <div id="pipeline"></div>
+    </div>
+  </section>
+
+  <!-- 3. MÉTODOS DE REFERENCIA -->
+  <section>
+    <div class="section-title">03 · Métodos esenciales de Array</div>
+    <div class="card">
+      <h2>Guía rápida</h2>
+      <p class="desc">Los métodos más usados con su descripción y si mutan o no el array original.</p>
+      <div class="methods-ref" id="methods-ref"></div>
+    </div>
+  </section>
+
+</main>
+<footer>JavaScript v9 · freeCodeCamp · Módulo 04 — Arreglos</footer>
+<script>
+  let arr = [3, 7, 1, 9, 4, 2, 8];
+
+  function renderArr() {
+    const d = document.getElementById('arr-display');
+    d.innerHTML = '';
+    arr.forEach((v, i) => {
+      const el = document.createElement('div');
+      el.className = 'arr-item';
+      el.innerHTML = `<span class="idx">[${i}]</span>${v}`;
+      d.appendChild(el);
+    });
+  }
+
+  function log(msg) {
+    const l = document.getElementById('arr-log');
+    l.textContent = msg;
+  }
+
+  function arrOp(op) {
+    const val = document.getElementById('arr-val').value;
+    const v = isNaN(val) ? val : Number(val);
+    switch(op) {
+      case 'push':    if(val) { arr.push(v); log(`push(${v}) → length: ${arr.length}`); } break;
+      case 'pop':     { const r=arr.pop(); log(`pop() → eliminó: ${r}`); } break;
+      case 'unshift': if(val) { arr.unshift(v); log(`unshift(${v}) → agregado al inicio`); } break;
+      case 'shift':   { const r=arr.shift(); log(`shift() → eliminó: ${r} del inicio`); } break;
+      case 'reverse': arr.reverse(); log('reverse() → array invertido'); break;
+      case 'sort':    arr.sort((a,b)=>a-b); log('sort() → array ordenado ascendente'); break;
+      case 'reset':   arr=[3,7,1,9,4,2,8]; log('Array reiniciado'); break;
+    }
+    renderArr();
+  }
+
+  renderArr();
+
+  // pipeline
+  const pipeData = [1,2,3,4,5,6,7,8,9,10];
+  const steps = [
+    { label:'Original', arr: pipeData, desc:'' },
+    { label:'.map(x => x * 2)', arr: pipeData.map(x=>x*2), desc:'multiplica cada elemento' },
+    { label:'.filter(x => x > 10)', arr: pipeData.map(x=>x*2).filter(x=>x>10), desc:'filtra los > 10' },
+    { label:'.reduce((s,x)=>s+x, 0)', arr: [pipeData.map(x=>x*2).filter(x=>x>10).reduce((s,x)=>s+x,0)], desc:'suma total' },
+  ];
+  const pc = document.getElementById('pipeline');
+  steps.forEach((s,i) => {
+    const row = document.createElement('div');
+    row.className = 'pipe-step';
+    const lbl = document.createElement('div');
+    lbl.className = 'pipe-label';
+    lbl.textContent = s.label;
+    const items = document.createElement('div');
+    items.className = 'pipe-arr';
+    s.arr.forEach(v => {
+      const el = document.createElement('span');
+      el.className = 'pipe-item' + (i===3?' hi':'');
+      el.textContent = v;
+      items.appendChild(el);
+    });
+    if(i<steps.length-1){ const a=document.createElement('div'); a.className='pipe-arrow'; a.textContent='→'; row.appendChild(lbl); row.appendChild(items); row.appendChild(a); }
+    else { const res=document.createElement('div'); res.style.cssText='font-family:var(--mono);font-size:1.1rem;font-weight:700;color:var(--accent2)'; res.textContent='= '+s.arr[0]; row.appendChild(lbl); row.appendChild(items); row.appendChild(res); }
+    pc.appendChild(row);
+  });
+
+  // methods reference
+  const methods = [
+    { name:'.push(val)',   desc:'Agrega al final. Muta ✓', mut:true },
+    { name:'.pop()',       desc:'Elimina el último. Muta ✓', mut:true },
+    { name:'.shift()',     desc:'Elimina el primero. Muta ✓', mut:true },
+    { name:'.unshift(val)',desc:'Agrega al inicio. Muta ✓', mut:true },
+    { name:'.map(fn)',     desc:'Transforma cada elemento. Nuevo array ✓', mut:false },
+    { name:'.filter(fn)',  desc:'Filtra por condición. Nuevo array ✓', mut:false },
+    { name:'.reduce(fn)',  desc:'Acumula a un único valor', mut:false },
+    { name:'.find(fn)',    desc:'Retorna el primer match', mut:false },
+    { name:'.some(fn)',    desc:'true si alguno cumple', mut:false },
+    { name:'.every(fn)',   desc:'true si todos cumplen', mut:false },
+    { name:'.includes(v)', desc:'true si el valor existe', mut:false },
+    { name:'.slice(a,b)',  desc:'Extrae porción. No muta ✓', mut:false },
+    { name:'.splice(a,n)', desc:'Elimina/inserta. Muta ✓', mut:true },
+    { name:'.flat()',      desc:'Aplana arrays anidados', mut:false },
+    { name:'.join(sep)',   desc:'Convierte a string', mut:false },
+    { name:'.reverse()',   desc:'Invierte. Muta ✓', mut:true },
+  ];
+  const ref = document.getElementById('methods-ref');
+  methods.forEach(m => {
+    const c = document.createElement('div');
+    c.className = 'm-card';
+    c.innerHTML = `<div class="m-name">${m.name}</div><p>${m.desc}</p>`;
+    if(m.mut) c.style.borderLeftColor = 'var(--accent3)';
+    ref.appendChild(c);
+  });
+</script>
+</body>
+</html>
