@@ -72,6 +72,18 @@ One interactive page per curriculum module, explaining the concepts with live ex
 
 ---
 
+## Workshops (3)
+
+Interactive versions of freeCodeCamp workshops and labs, with a visual layer added on top of the platform's logic. Each page states its origin at the bottom.
+
+| # | Workshop | Live Demo | Concepts |
+|---|----------|-----------|----------|
+| 01 | [BitStack](./workshops/01-decimal-to-binary/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/workshops/01-decimal-to-binary/) | Recursion, call stack, decimal to binary |
+| 02 | [SpamShield](./workshops/02-spam-filter/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/workshops/02-spam-filter/) | Regular expressions, character classes, groups, `.some()` |
+| 03 | [Permuta](./workshops/03-permutations/) | [▶ View](https://eprieto85.github.io/freecodecamp-javascript/workshops/03-permutations/) | Recursion, `Set`, string permutations |
+
+---
+
 ## Mini-Apps (5)
 
 Larger projects that combine several concepts.

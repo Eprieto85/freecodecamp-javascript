@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitStack — Decimal to Binary with Recursion</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>BitStack</h1>
+      <p>Convert a decimal number to binary and watch the recursive call stack grow and unwind.</p>
+    </header>
+
+    <section class="panel">
+      <label for="number-input">Decimal number</label>
+      <div class="row">
+        <input id="number-input" type="number" min="0" value="13" />
+        <button id="convert-btn">Convert</button>
+      </div>
+      <p id="error" class="error" role="alert"></p>
+      <div class="result-box">
+        <span class="result-label">Binary</span>
+        <output id="result">—</output>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h2>Call stack</h2>
+        <div id="call-stack" class="stack" aria-live="polite"></div>
+      </div>
+      <div class="panel">
+        <h2>What is happening</h2>
+        <ol id="log" class="log"></ol>
+      </div>
+    </section>
+
+    <footer class="ep-footer">
+      <p class="ep-note">Based on the freeCodeCamp "Build a Decimal to Binary Converter" workshop (JavaScript Algorithms and Data Structures v9). The recursive logic follows the platform's workshop; the interface and the step-by-step visualization were designed for this page.</p>
+      <div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

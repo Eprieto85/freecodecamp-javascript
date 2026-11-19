@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpamShield — Regex Spam Filter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>SpamShield</h1>
+      <p>Paste a message and see which regular expressions flag it.</p>
+    </header>
+
+    <section class="panel">
+      <label for="message-input">Message</label>
+      <textarea id="message-input" rows="4" placeholder="Type or paste a message..."></textarea>
+      <div class="chips" id="examples"></div>
+      <button id="check-message-btn">Check message</button>
+      <p id="result-message" class="verdict" aria-live="polite"></p>
+    </section>
+
+    <section class="panel">
+      <h2>Rules in the deny list</h2>
+      <ul id="rules" class="rules"></ul>
+    </section>
+
+    <footer class="ep-footer">
+      <p class="ep-note">Based on the freeCodeCamp "Build a Spam Filter" workshop (JavaScript Algorithms and Data Structures v9). The regular expressions and the isSpam logic follow the platform's workshop; the interface and the rule highlighting were designed for this page.</p>
+      <div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

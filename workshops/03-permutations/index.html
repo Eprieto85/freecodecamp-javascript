@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Permuta — Permutation Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Permuta</h1>
+      <p>Every unique arrangement of a word, built with recursion.</p>
+    </header>
+
+    <section class="panel">
+      <label for="word-input">Word</label>
+      <div class="row">
+        <input id="word-input" type="text" value="far" maxlength="7" autocomplete="off" />
+        <button id="generate-btn">Generate</button>
+      </div>
+      <p id="summary" class="summary" aria-live="polite"></p>
+      <ul id="results" class="results"></ul>
+    </section>
+
+    <footer class="ep-footer">
+      <p class="ep-note">Based on the freeCodeCamp "Build a Permutation Generator" lab (JavaScript Algorithms and Data Structures v9). The permuteString recursion follows the platform's lab; the interface was designed for this page.</p>
+      <div class="ep-credit">Built by <strong>Edisson Prieto</strong> &middot; <a href="https://github.com/Eprieto85">GitHub</a> &middot; <a href="https://www.freecodecamp.org/eprieto">freeCodeCamp</a></div>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
